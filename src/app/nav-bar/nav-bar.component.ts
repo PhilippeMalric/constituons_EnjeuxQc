@@ -28,6 +28,11 @@ ngOnInit(){
   }
 }
 
+clickMenu(){
+  console.log("click")
+  this.opened = false;
+}
+
   ngOnDestroy(): void {
   }
 }

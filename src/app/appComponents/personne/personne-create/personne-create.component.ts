@@ -39,7 +39,7 @@ export class PersonneCreateComponent implements OnInit {
     });
   }
 
-  onFormSubmit(form:NgForm) {
+  onFormSubmit(form:FormGroup) {
     this.api.postPersonne(form)
       .subscribe(res => {
           let id = res['_id'];
@@ -48,7 +48,7 @@ export class PersonneCreateComponent implements OnInit {
           console.log(err);
         });
   }
-  onFormSubmit2(form1:NgForm,form2:NgForm) {
+  onFormSubmit2(form1:FormGroup,form2:FormGroup) {
 
     console.log(form1,form2)
 
@@ -61,7 +61,7 @@ export class PersonneCreateComponent implements OnInit {
       })
       .subscribe(res => {
           let id = res['_id'];
-          this.router.navigate(['/personne-details', id]);
+          
         }, (err) => {
           console.log(err);
         });
@@ -84,7 +84,7 @@ export class PersonneCreateComponent implements OnInit {
       }, 100);
     setTimeout(() => {
       clearInterval(interval)
-      this.router.navigate(['/personnes'])
+      
       },1500)
   }
 

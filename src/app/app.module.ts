@@ -41,6 +41,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTreeModule } from '@angular/material/tree';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 // ----------------------prime ng
 
@@ -64,20 +65,20 @@ import { MajsrvService } from './service/majsrv.service'
 import { DataService } from './sharedServices'
 
 
-import { PersonneComponent } from './AppComponents/personne/personne/personne.component';
-import { PersonneDetailComponent } from './AppComponents/personne/personne-detail/personne-detail.component';
-import { PersonneCreateComponent } from './AppComponents/personne/personne-create/personne-create.component';
-import { PersonneEditComponent } from './AppComponents/personne/personne-edit/personne-edit.component';
+import { PersonneComponent } from './appComponents/personne/personne/personne.component';
+import { PersonneDetailComponent } from './appComponents/personne/personne-detail/personne-detail.component';
+import { PersonneCreateComponent } from './appComponents/personne/personne-create/personne-create.component';
+import { PersonneEditComponent } from './appComponents/personne/personne-edit/personne-edit.component';
 
-import { EnjeuComponent } from './AppComponents/enjeu/enjeu/enjeu.component';
-import { EnjeuDetailComponent } from './AppComponents/enjeu/enjeu-detail/enjeu-detail.component';
-import { EnjeuCreateComponent } from './AppComponents/enjeu/enjeu-create/enjeu-create.component';
-import { EnjeuEditComponent } from './AppComponents/enjeu/enjeu-edit/enjeu-edit.component';
+import { EnjeuComponent } from './appComponents/enjeu/enjeu/enjeu.component';
+import { EnjeuDetailComponent } from './appComponents/enjeu/enjeu-detail/enjeu-detail.component';
+import { EnjeuCreateComponent } from './appComponents/enjeu/enjeu-create/enjeu-create.component';
+import { EnjeuEditComponent } from './appComponents/enjeu/enjeu-edit/enjeu-edit.component';
 
-import { OpinionComponent } from './AppComponents/opinion/opinion/opinion.component';
-import { OpinionDetailComponent } from './AppComponents/opinion/opinion-detail/opinion-detail.component';
-import { OpinionCreateComponent } from './AppComponents/opinion/opinion-create/opinion-create.component';
-import { OpinionEditComponent } from './AppComponents/opinion/opinion-edit/opinion-edit.component';
+import { OpinionComponent } from './appComponents/opinion/opinion/opinion.component';
+import { OpinionDetailComponent } from './appComponents/opinion/opinion-detail/opinion-detail.component';
+import { OpinionCreateComponent } from './appComponents/opinion/opinion-create/opinion-create.component';
+import { OpinionEditComponent } from './appComponents/opinion/opinion-edit/opinion-edit.component';
 
 import { EnjeuxPersonnesComponent } from './enjeux-personnes/enjeux-personnes.component';
 import { BadgeComponent } from './badge/badge.component';
@@ -87,6 +88,7 @@ import { EnjeuxTabComponent } from './appComponents/enjeu/enjeux-tab/enjeux-tab.
 import { OpinionsTabComponent } from './appComponents/opinion/opinions-tab/opinions-tab.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
+import { DialogAddOpinion } from './appComponents/opinion/opinion-modal/opinion-modal.component';
 
 
 
@@ -172,22 +174,20 @@ const ROUTES: Routes = [
 
 @NgModule({
   declarations: [
+    DialogAddOpinion,
     AppComponent,
     PersonneComponent,
     PersonneDetailComponent,
     PersonneCreateComponent,
     PersonneEditComponent,
-
     EnjeuComponent,
     EnjeuDetailComponent,
     EnjeuCreateComponent,
     EnjeuEditComponent,
-
     OpinionComponent,
     OpinionDetailComponent,
     OpinionCreateComponent,
     OpinionEditComponent,
-
     NavBarComponent,
     NiceParagraphDirective,
     
@@ -208,48 +208,49 @@ const ROUTES: Routes = [
     HomeComponent
   ],
   imports: [
-  BrowserModule,
-  BrowserAnimationsModule,
-  HttpClientModule,
-  RouterModule.forRoot(ROUTES),
-  FormsModule,
-  ReactiveFormsModule,
-  RouterModule,
-  MatTreeModule,
-  MatSlideToggleModule,
-  MatBadgeModule,
-  MatDialogModule,
-  MatStepperModule,
-  MatFormFieldModule,
-  MatSelectModule,
-  MatCardModule,
-  MatExpansionModule,
-  MatMenuModule,
-  MatButtonModule,
-  MatToolbarModule,
-  MatSidenavModule,
-  MatIconModule,
-  MatListModule,
-  MatGridListModule,
-  MatInputModule,
-  MatPaginatorModule,
-  MatProgressSpinnerModule,
-  MatSortModule,
-  MatTableModule,
-  MatTabsModule,
-  MatChipsModule,
-  MatAutocompleteModule,
-  CardModule,
-  TableModule,
-  ButtonModule,
-  PanelModule,
-  DropdownModule,
-  DialogModule,
-  DataViewModule,
-  DataScrollerModule,
-  LayoutModule,
-  SidebarModule,
-  AccordionModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    RouterModule.forRoot(ROUTES),
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    MatCheckboxModule,
+    MatTreeModule,
+    MatSlideToggleModule,
+    MatBadgeModule,
+    MatDialogModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatCardModule,
+    MatExpansionModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatGridListModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    CardModule,
+    TableModule,
+    ButtonModule,
+    PanelModule,
+    DropdownModule,
+    DialogModule,
+    DataViewModule,
+    DataScrollerModule,
+    LayoutModule,
+    SidebarModule,
+    AccordionModule
   ],
   providers: [MajsrvService,DataService],
   bootstrap: [AppComponent]

@@ -8,6 +8,8 @@ import { DataService } from '../sharedServices';
 })
 export class HomeComponent implements OnInit {
 
+  checked:Boolean
+
   constructor(public dataService: DataService) { }
 
   ngOnInit() {

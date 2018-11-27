@@ -10,15 +10,15 @@ import { ApiService } from '../../../api.service';
 })
 export class OpinionDetailComponent implements OnInit {
 
-  @Input() enjeuId:string[];
+  @Input() enjeuxId:string[];
   @Input() id :string[];
-  opinion = {};
+  opinion :any = {};
 
   constructor(private route: ActivatedRoute, private api: ApiService, private router: Router) { }
 
   ngOnInit() {
-    if(this.enjeuId == []){
-      this.enjeuId = this.route.snapshot.params['enjeuId']
+    if(this.enjeuxId == []){
+      this.enjeuxId = this.route.snapshot.params['enjeuId']
     }
     if(this.id == []){
       this.id = this.route.snapshot.params['id']
@@ -45,9 +45,9 @@ export class OpinionDetailComponent implements OnInit {
   }
 
   deleteOpinionFromOneEnjeu() {
-    this.api.deleteOpinionFromOneEnjeu(this.id,this.enjeuId)
+    this.api.deleteOpinionFromOneEnjeu(this.id,this.enjeuxId)
       .subscribe(res => {
-          this.router.navigate(['/enjeu-details',this.enjeuId]);
+          this.router.navigate(['/enjeu-details',this.enjeuxId]);
         }, (err) => {
           console.log(err);
         }

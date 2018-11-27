@@ -1,11 +1,12 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { Personne } from 'src/app/class/Personne';
 import { ApiService } from 'src/app/api.service';
 
 export interface DialogData {
   title: string;
   description: string;
+  author: string;
 }
 
 @Component({
@@ -70,19 +71,14 @@ export class OpinionModalComponent implements OnInit {
       this.author = result.author
     });
   }
-
-
-
 }
 
 @Component({
   selector: 'app-dialog-add-opinion',
   templateUrl: 'dialogAddOpinion.html',
 })
-
-
 export class DialogAddOpinion {
-
+  options: string[] =[]
   constructor(
     public dialogRef: MatDialogRef<DialogAddOpinion>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}

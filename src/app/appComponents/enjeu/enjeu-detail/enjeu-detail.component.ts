@@ -10,11 +10,13 @@ import { ApiService } from '../../../api.service';
 })
 export class EnjeuDetailComponent implements OnInit {
 
-  enjeu = {};
+  enjeu:any = {};
   enjeuId = "";
   opinions = []
   opsID:string[] = []
   opTogle:Boolean = false
+ 
+
 
   constructor(private route: ActivatedRoute, private api: ApiService, private router: Router) { }
 

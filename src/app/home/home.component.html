@@ -4,6 +4,9 @@
     <h1>Plateforme EnjeuxQc</h1> 
     <p>Bienvenue sur la plateforme Enjeux Québec.</p>
     <hr>
+    <mat-checkbox [(ngModel)]="checked">Cochez si vous voulez vous identifier</mat-checkbox>
+    <app-personne-create *ngIf="checked"></app-personne-create>
+    <br>
     <h2>Introduction</h2>
     <p>Cette plateforme a été conçue pour faciliter les échanges sur des enjeux touchant les Québécois.</p>
     <p>Elle est interactive de plusieurs manières : </p>

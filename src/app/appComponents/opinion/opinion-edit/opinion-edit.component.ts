@@ -17,6 +17,7 @@ export class OpinionEditComponent implements OnInit {
   title:string = '';
   author:string = '';
   description:string = '';
+  matcher:any;
 
   constructor(private router: Router, private route: ActivatedRoute, private api: ApiService, private formBuilder: FormBuilder) { }
 

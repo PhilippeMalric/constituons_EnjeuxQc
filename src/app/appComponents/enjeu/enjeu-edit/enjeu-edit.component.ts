@@ -25,6 +25,8 @@ export class EnjeuEditComponent implements OnInit {
   badges:string = '';
   opinions:any[];
   opsID:string[] = [];
+  matcher:any;
+
   constructor(private router: Router, private route: ActivatedRoute, private api: ApiService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -64,7 +66,7 @@ export class EnjeuEditComponent implements OnInit {
     });
   }
 
-  onFormSubmit(form1:NgForm,form2:NgForm,form3:NgForm,form4:NgForm) {
+  onFormSubmit(form1:FormGroup,form2:FormGroup,form3:FormGroup,form4:FormGroup) {
     this.api.updateEnjeu(this.id, {
 
     titre: form1.value.titre,
@@ -82,7 +84,7 @@ export class EnjeuEditComponent implements OnInit {
       );
   }
 
-  onOpinionFormSubmit(form:NgForm) {
+  onOpinionFormSubmit(form:FormGroup) {
     //console.log("id",this.id)
     this.api.addOpinion(this.id, form)
       .subscribe(res => {

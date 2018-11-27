@@ -10,7 +10,7 @@ import { ApiService } from '../../../api.service';
 })
 export class PersonneDetailComponent implements OnInit {
 
-  personne = {};
+  personne : any = {};
 
   constructor(private route: ActivatedRoute, private api: ApiService, private router: Router) { }
 

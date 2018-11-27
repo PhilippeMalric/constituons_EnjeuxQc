@@ -56,14 +56,14 @@
 
   <mat-sidenav #snav [mode]="mode" [opened]="opened" role="navigation">
       <mat-nav-list>
-        <button mat-menu-item routerLink="/home">Accueil</button>
+        <button mat-menu-item routerLink="/home" (click)="snav.toggle()">Accueil</button>
         <hr>
-        <button mat-menu-item routerLink="/enjeux">Commission 1</button>
-        <button mat-menu-item routerLink="/enjeux">Commission 2</button>
-        <button mat-menu-item routerLink="/enjeux">Commission 3</button>
-        <button mat-menu-item routerLink="/enjeux">Commission 4</button>
-        <button mat-menu-item routerLink="/enjeux">Commission 5</button>
-        <button mat-menu-item routerLink="/enjeux">Commission 6</button>
+        <button mat-menu-item routerLink="/enjeux" (click)="snav.toggle()">Commission 1</button>
+        <button mat-menu-item routerLink="/enjeux" (click)="snav.toggle()">Commission 2</button>
+        <button mat-menu-item routerLink="/enjeux" (click)="snav.toggle()">Commission 3</button>
+        <button mat-menu-item routerLink="/enjeux" (click)="snav.toggle()">Commission 4</button>
+        <button mat-menu-item routerLink="/enjeux" (click)="snav.toggle()">Commission 5</button>
+        <button mat-menu-item routerLink="/enjeux" (click)="snav.toggle()">Commission 6</button>
       </mat-nav-list>
     </mat-sidenav>
   <mat-sidenav-content>

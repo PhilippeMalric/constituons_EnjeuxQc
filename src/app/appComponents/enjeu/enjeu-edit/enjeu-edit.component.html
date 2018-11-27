@@ -51,7 +51,7 @@
           </mat-step>
           <mat-step [stepControl]="badgeFormGroup">
             <ng-template matStepLabel>Modifiez les badges</ng-template>
-            <form [formGroup]="badgeFormGroup" (ngSubmit)="onFormSubmit(enjeuForm.value, descForm.value, catForm.value, badgeForm.value )">
+            <form [formGroup]="badgeFormGroup" (ngSubmit)="onFormSubmit(titreFormGroup.value, descFormGroup.value, catFormGroup.value, badgeFormGroup.value )">
               <mat-form-field class="example-full-width">
                 <textarea matInput placeholder="Badges" formControlName="badges"
                       [errorStateMatcher]="matcher"></textarea>

@@ -71,7 +71,7 @@ export class EnjeuCreateComponent implements OnInit {
 
   }
 
-  onFormSubmitStep = (form1:NgForm,form2:NgForm,form3:NgForm) => {
+  onFormSubmitStep = (form1:FormGroup,form2:FormGroup,form3:FormGroup) => {
     this.api.updateEnjeu(this.id,{
       'titre' :form1.value.titre,
       'description' :form2.value.description,
