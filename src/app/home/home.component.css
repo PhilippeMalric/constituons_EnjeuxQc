@@ -1,0 +1,13 @@
+.aligned-with-icon{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px; /* optional */
+}
+
+ul>li{
+    list-style-type: none;
+}
+
+.topSpace{
+    margin-top: 10px;
+}

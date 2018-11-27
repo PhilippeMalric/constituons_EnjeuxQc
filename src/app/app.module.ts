@@ -86,11 +86,12 @@ import { OpinionModalComponent } from './appComponents/opinion/opinion-modal/opi
 import { EnjeuxTabComponent } from './appComponents/enjeu/enjeux-tab/enjeux-tab.component';
 import { OpinionsTabComponent } from './appComponents/opinion/opinions-tab/opinions-tab.component';
 import { AboutComponent } from './about/about.component';
+import { HomeComponent } from './home/home.component';
 
 
 
 const ROUTES: Routes = [
-  { path: 'home', component: EnjeuxPersonnesComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'testOutil', component: EnjeuxPersonnesComponent },
   { path: 'test', component: ChooseCategorieComponent },
@@ -202,7 +203,9 @@ const ROUTES: Routes = [
     
     OpinionsTabComponent,
     
-    AboutComponent
+    AboutComponent,
+    
+    HomeComponent
   ],
   imports: [
   BrowserModule,
