@@ -1,0 +1,29 @@
+<form [formGroup]="opinionForm" (ngSubmit)="onFormSubmit(opinionForm.value)">
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Titre" formControlName="title"
+           [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!opinionForm.get('title').valid && opinionForm.get('title').touched">Please enter Opinion Title</span>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Auteur" formControlName="author"
+           [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!opinionForm.get('author').valid && opinionForm.get('author').touched">Please enter Opinion Author</span>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="Description" formControlName="description"
+           [errorStateMatcher]="matcher"></textarea>
+    <mat-error>
+      <span *ngIf="!opinionForm.get('description').valid && opinionForm.get('description').touched">Please enter Opinion Description</span>
+    </mat-error>
+  </mat-form-field>
+  <div class="button-row">
+    <button type="submit" [disabled]="!opinionForm.valid" mat-raised-button color="primary"><mat-icon>save</mat-icon></button>
+  </div>
+</form>

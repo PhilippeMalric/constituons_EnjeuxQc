@@ -1,0 +1,27 @@
+<mat-grid-list [cols]="cols">
+    <mat-grid-tile *ngFor="let element of opinions">
+      <mat-card>
+          <mat-card-title>
+              {{element.title}}
+          </mat-card-title>
+          <mat-card-content>
+              {{element.description}}
+          </mat-card-content>
+          <mat-card-subtitle>
+              {{element.author}}
+          </mat-card-subtitle>
+          <mat-card-actions class="center">
+              <button  [ngClass]="{marginH10: true}" mat-mini-fab color="accent">
+                  <mat-icon [matBadge]="element.dontLike" [matBadgeColor]="element.dontLikeColor" matBadgePosition="above after" aria-label="thumb_down" (click)="addDontLike(element._id)">thumb_down</mat-icon>
+              </button>
+              <button mat-mini-fab [routerLink]="['/opinion-details/', element._id, enjeuId]" color="primary">
+                <mat-icon aria-label="details">details</mat-icon>
+              </button>
+              <button  [ngClass]="{marginH10: true}" mat-mini-fab color="accent" (click)="addLike(element._id)">
+                  <mat-icon [matBadge]="element.like" [matBadgeColor]="element.likeColor" matBadgePosition="below before" aria-label="thumb_up">thumb_up</mat-icon>
+              </button>
+          </mat-card-actions>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
+

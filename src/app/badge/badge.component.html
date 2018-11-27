@@ -1,0 +1,7 @@
+<mat-grid-list cols="4" rowHeight="30px">
+    <mat-grid-tile *ngFor="let e of translatedBadge">
+            <i class="material-icons" [ngStyle]="style(e.color)">{{e.iconeName}}</i>
+    </mat-grid-tile>
+</mat-grid-list>
+
+        

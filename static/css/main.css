@@ -1,0 +1,17 @@
+.inline {
+  display: inline;
+  margin: 10px;
+  vertical-align:central
+}
+div {
+  /*border: 1px dotted black;*/
+}
+p {
+  margin-bottom: 8px;
+  /*border: 1px dashed black; */
+}
+
+td {
+  /*border: 1px groove black;*/
+  vertical-align: bottom
+}

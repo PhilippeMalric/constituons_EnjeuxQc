@@ -1,0 +1,19 @@
+<h1>Ajoutez une opinion</h1>
+<div mat-dialog-content>
+ 
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.title">
+    <input matInput [(ngModel)]="data.description">
+    <input type="text" placeholder="Choisis l'auteur"  [(ngModel)]="data.author" aria-label="Name" matInput [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of options" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>

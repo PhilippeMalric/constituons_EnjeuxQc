@@ -1,0 +1,81 @@
+<mat-tab-group>
+  <mat-tab label="Modifiez l'Enjeux"> 
+    <mat-vertical-stepper #verticalSteper [linear]="false" #stepperV>
+      <mat-step>
+        <ng-template matStepLabel>Modifiez l'enjeu</ng-template>
+        <mat-horizontal-stepper [linear]="false" #stepperH>
+          <mat-step [stepControl]="titreFormGroup">
+            <ng-template matStepLabel>Modifiez le titre</ng-template>
+            <form [formGroup]="titreFormGroup">
+              <h1>Modifiez l'enjeu</h1>
+              <mat-form-field class="example-full-width">
+                <input matInput formControlName="titre" cdkFocusInitial
+                    [errorStateMatcher]="matcher">
+                <mat-error>
+                  <span *ngIf="!titreFormGroup.get('titre').valid && titreFormGroup.get('titre').touched">Please enter titre</span>
+                </mat-error>
+              </mat-form-field>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="descFormGroup">
+            <ng-template matStepLabel>Modifiez la description</ng-template>
+            <form [formGroup]="descFormGroup">
+              <mat-form-field class="example-full-width">
+                <textarea 
+                  matInput
+                  cdkTextareaAutosize
+                  #autosize="cdkTextareaAutosize"
+                  cdkAutosizeMinRows="2"
+                  cdkAutosizeMaxRows="5" 
+                  placeholder="Description" 
+                  formControlName="description" 
+                  [errorStateMatcher]="matcher" required>
+                </textarea>
+                <mat-error>
+                  <span *ngIf="!descFormGroup.get('description').valid && descFormGroup.get('description').touched">Please enter description</span>
+                </mat-error>
+              </mat-form-field>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="catFormGroup">
+            <ng-template matStepLabel>Modifiez la catégorie</ng-template>
+            <form [formGroup]="catFormGroup" >
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Catégorie" formControlName="categorie"
+                      [errorStateMatcher]="matcher">
+                <mat-error>
+                  <span *ngIf="!catFormGroup.get('categorie').valid && catFormGroup.get('categorie').touched">Please enter categorie</span>
+                </mat-error>
+              </mat-form-field>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="badgeFormGroup">
+            <ng-template matStepLabel>Modifiez les badges</ng-template>
+            <form [formGroup]="badgeFormGroup" (ngSubmit)="onFormSubmit(enjeuForm.value, descForm.value, catForm.value, badgeForm.value )">
+              <mat-form-field class="example-full-width">
+                <textarea matInput placeholder="Badges" formControlName="badges"
+                      [errorStateMatcher]="matcher"></textarea>
+                <mat-error>
+                  <span *ngIf="!badgeFormGroup.get('badges').valid && badgeFormGroup.get('badges').touched">Please enter badges</span>
+                </mat-error>
+              </mat-form-field>
+            </form>
+          </mat-step>
+        </mat-horizontal-stepper>
+        <div class="button-row">
+            <button type="submit" [disabled]="!badgeFormGroup.valid && !catFormGroup.valid && !descFormGroup.valid && !titreFormGroup.valid" mat-raised-button color="primary"><mat-icon>save</mat-icon></button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Ajoutez une opinion</ng-template>
+        <p>
+          Ajoutez une opinion
+        </p>
+        <app-opinion-create  [enjeuId]="id" (opinionEvent)="opinionRegistered($event)"></app-opinion-create>
+      </mat-step>
+    </mat-vertical-stepper>
+  </mat-tab>  
+  <mat-tab label="View">
+      <app-opinion [enjeuId]="id" [opinions]="opinions"></app-opinion>
+  </mat-tab>
+</mat-tab-group>

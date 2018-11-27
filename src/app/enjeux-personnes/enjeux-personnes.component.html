@@ -1,0 +1,61 @@
+
+<ng-container>
+  <div class="container">
+    <h1>Plateforme EnjeuxQc</h1> 
+    <p>Bienvenue sur la plateforme Enjeux Québec.</p>
+    <hr>
+    <h2>Introduction</h2>
+    <p>Cette plateforme a été conçue pour faciliter les échanges sur des enjeux touchant les Québécois.</p>
+    <p>Elle est interactive de plusieurs manières : </p>
+    <ul>
+      <li class="topSpace">
+        <span class="aligned-with-icon">Le menu de gauche permet d'accèder aux sections de la page,<br>il peut être fermer avec l'icône</span>
+        <mat-icon>menu</mat-icon> 
+      </li>
+      <li class="topSpace">
+        <p> Cliquez sur les icônes dans la barre du haut :</p>
+        <ul>
+          <li>
+            <span class="aligned-with-icon">Pour voir la liste des personnes</span>
+            <mat-icon>recent_actors</mat-icon>
+          </li>
+          <li>
+              <span class="aligned-with-icon">Pour voir la liste des enjeux</span>
+              <mat-icon>art_track</mat-icon> 
+          </li>
+        </ul>
+      </li>
+    </ul>
+    
+    
+    <h2>Schéma sous-jaçent le site web</h2>
+    <p>Trois principaux éléments vont vous permettre d'explorer les enjeux,<br>leurs opinions et les personnes qui les ont émisent</p>
+    <p>Ils sont listé dans le shéma suivant :</p>
+    <ul>
+      <li>
+        <p>Un enjeu contient : </p>
+        <div>
+          <p>->des opinions qui sont relié à des</p>
+          <p>
+          --> personnes
+          </p>
+        </div>
+      </li>
+      <li>
+        <p>Chaque Personnes à </p>
+        <p>-> une liste d'opinions </p>
+        <p>-> une liste d'enjeu </p>
+      </li>
+    </ul>
+
+    <h3>Pour commencer entrez votre nom, puis explorez les enjeux</h3>
+
+    <input [(ngModel)]="dataService.name" #ctrl="ngModel" required>
+
+    <div>
+      <button mat-mini-fab [routerLink]="['/enjeux']" routerLinkActive="router-link-active" color="accent">
+        <mat-icon>art_track</mat-icon>
+      </button>
+    </div>
+  </div>
+</ng-container>

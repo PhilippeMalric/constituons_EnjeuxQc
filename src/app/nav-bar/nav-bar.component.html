@@ -1,0 +1,78 @@
+
+<mat-menu #subMenu="matMenu">
+    
+  <button mat-menu-item routerLink="/test">Test</button>
+  <button mat-menu-item routerLink="/personne-create">Création de personnes</button>
+  <button mat-menu-item routerLink="/enjeu-create">Création d'enjeux</button>
+  <button mat-menu-item routerLink="/opinion-create">Création d'opinions</button>
+  <hr>
+  <button mat-menu-item routerLink="/enjeuxTab">Tableau d'enjeux</button>
+</mat-menu>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item routerLink="/personnes">Liste de personnes</button>
+  <button mat-menu-item routerLink="/enjeux">Liste d'enjeux</button>
+  <button mat-menu-item routerLink="/opinions">Liste d'opinion</button>
+  <button mat-menu-item [matMenuTriggerFor]="subMenu">Liens direct<br>pour la création</button>
+</mat-menu>
+
+
+<button  mat-fab class="md-fab-bottom-left2 custom-button app-fab--absolute" 
+          color="primary" aria-label="sideBar" [matMenuTriggerFor]="menu">
+    <span class="mdc-fab__icon material-icons ">favorite</span>
+ </button>
+
+<mat-toolbar color="primary">
+  <a target="_blank" rel="noopener noreferrer" href="https://angular-university.io/home">
+    <img class="small-border-radius d-inline-block align-top" src="/assets/images/Angular.png" width="30" height="30" alt="">
+  </a>
+  <button class="marginH10" mat-mini-fab (click)="snav.toggle()" color="warn">
+      <mat-icon>menu</mat-icon>
+  </button>
+  <div class="center">
+    <span class="fill-remaining-space">
+      <button mat-mini-fab [routerLink]="['/personnes']" routerLinkActive="router-link-active" color="accent">
+        <mat-icon>recent_actors</mat-icon>
+      </button>
+      <button class="marginH10" routerLink="/home" mat-raised-button color="primary">Enjeux Qc</button>
+      <button mat-mini-fab [routerLink]="['/enjeux']" routerLinkActive="router-link-active" color="accent">
+        <mat-icon>art_track</mat-icon>
+      </button>
+    </span>
+  </div>
+  <button class="marginH10" mat-raised-button color="accent" [routerLink]="['/about']">À propos</button>
+</mat-toolbar>
+
+<!-- 
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+    <div>
+      
+    </div>
+  </mat-drawer>
+
+-->
+
+<mat-sidenav-container  >
+
+  <mat-sidenav #snav [mode]="mode" [opened]="opened" role="navigation">
+      <mat-nav-list>
+        <button mat-menu-item routerLink="/home">Accueil</button>
+        <hr>
+        <button mat-menu-item routerLink="/enjeux">Commission 1</button>
+        <button mat-menu-item routerLink="/enjeux">Commission 2</button>
+        <button mat-menu-item routerLink="/enjeux">Commission 3</button>
+        <button mat-menu-item routerLink="/enjeux">Commission 4</button>
+        <button mat-menu-item routerLink="/enjeux">Commission 5</button>
+        <button mat-menu-item routerLink="/enjeux">Commission 6</button>
+      </mat-nav-list>
+    </mat-sidenav>
+  <mat-sidenav-content>
+    <hr>
+    <router-outlet class="routeurOutlet"></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+
+
+

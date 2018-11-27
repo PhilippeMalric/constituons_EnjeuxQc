@@ -1,0 +1,23 @@
+img{
+    border-radius: 30%;
+    display: block;
+}
+
+ul>li {
+    list-style-type: none;
+}
+
+hr{
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+hr.small{
+    height: 4px;
+    background-color : #007bff;
+}
+
+hr.big{
+    background-color:#2196F3;
+    height: 6px;
+}

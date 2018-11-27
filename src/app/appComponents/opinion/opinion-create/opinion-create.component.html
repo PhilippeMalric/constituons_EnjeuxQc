@@ -1,0 +1,52 @@
+<p>Enjeu id : {{enjeu}}</p>
+<mat-horizontal-stepper [linear]="false" #stepper>
+  <mat-step [stepControl]="titreFormGroup">
+    <form [formGroup]="titreFormGroup">
+      <p>Écrivez une opinion</p>
+      <ng-template matStepLabel>Opinion</ng-template>
+      <mat-form-field class="formFieldWidth90pc center">
+        <input matInput placeholder="Titre" formControlName="title" required>
+      </mat-form-field>
+      <div class="center">
+        <button mat-button matStepperNext>Next + Prochain</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="descriptionFormGroup">
+    <form [formGroup]="descriptionFormGroup">
+      <ng-template matStepLabel>Description</ng-template>
+      <mat-form-field class="formFieldWidth90pc center">
+        <input matInput placeholder="Description" formControlName="description" required>
+      </mat-form-field>
+      <div class="center">
+        <button mat-button matStepperPrevious>Back - Retour</button>
+        <button mat-button matStepperNext>Next + Prochain</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="authorFormGroup">
+    <form [formGroup]="authorFormGroup" class="auto-complete-form">
+      <ng-template matStepLabel>Qui est l'auteur de l'opinion? / Who think this way?</ng-template>
+        <mat-form-field class="formFieldWidth90pc center">
+          <input type="text" placeholder="Choisissez un nom / Pick one name" formControlName="author" aria-label="Number" matInput [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of options" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      <div class="center">
+        <button mat-button matStepperPrevious>Back - Retour</button>
+        <button mat-button matStepperNext>Next + Prochain</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done = Fin</ng-template>
+    <div class="center">
+      <button mat-button matStepperPrevious>Back - Retour</button>
+      <button mat-button (click)="stepper.reset()">Reset l'opinion</button>
+      <button mat-button (click)="onFormSubmitStep(titreFormGroup,descriptionFormGroup,authorFormGroup)">Envoyez l'opinion / Submit</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

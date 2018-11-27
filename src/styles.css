@@ -1,0 +1,71 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+.md-fab-bottom-right2 {
+    top: auto !important;
+    right: 20px !important;
+    bottom: 10px !important;
+    left: auto !important;
+    position: fixed !important;
+    z-index: 2;
+}
+
+.center{
+      text-align: center; 
+      margin: auto;
+      margin-top: 20px;
+      width: fit-content;
+}
+
+.action{
+    text-align: center;
+    min-height: 80px;
+}
+
+.centerDiv{
+    margin: auto;
+    margin-top: 20px;
+    width: fit-content;
+}
+
+
+.mat-card-content{
+    max-height: 75px;
+    overflow: overlay;
+    margin-bottom: 5px;
+}
+
+.mat-card{
+    margin: 15px;
+    
+}
+
+.mat-card-subtitle{
+    max-height: 75px;
+    overflow: overlay;
+}
+
+.mat-grid-tile{
+    margin-top: 10px;
+    height: fit-content;
+}
+
+.auto-complete-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+.marginH10{
+    margin-left:10px !important;
+    margin-right:10px !important;
+  }
+
+.formFieldWidth90pc{
+    width: 90%;
+ }
+
+ .routeurOutlet{
+    max-width: 800px;
+    min-height: 1000px
+ }

@@ -1,0 +1,36 @@
+<ng-container>
+    <div class="container">
+        <p>Votre nom : </p>
+        <input [(ngModel)]="dataService.name" #ctrl="ngModel" required>
+        <mat-grid-list [cols]="cols">
+            <mat-grid-tile rowHeight="Fit" *ngFor="let element of enjeux;">
+            <mat-card style="margin-top: 50px;margin-bottom: 100px;">
+                <mat-card-title>
+                    {{element.titre}}
+                </mat-card-title>
+                <mat-card-content style="word-break: break-all;padding-right: 20px; text-align: justify;">
+                    <p>{{element.description}}</p>
+                </mat-card-content>
+                <mat-card-subtitle style="min-height:75px">
+                    <app-badge  badgesString={{element.badges}}></app-badge>
+                </mat-card-subtitle>
+                <mat-card-actions class="center">
+                    <button [ngClass]="{marginH10: true}" mat-mini-fab color="accent" (click)="addDontLike(element)">
+                        <mat-icon #like [matBadge]="element.dontLike" [matBadgeColor]="element.dontLikeColor" matBadgePosition="above after" aria-label="thumb_down">thumb_down</mat-icon>
+                    </button>
+                    <button  mat-mini-fab [routerLink]="['/enjeu-details/', element._id]" color="primary">
+                        <mat-icon aria-label="details">details</mat-icon>
+                    </button>
+                    <button  [ngClass]="{marginH10: true}" mat-mini-fab color="accent" (click)="addLike(element)">
+                        <mat-icon #dontLike [matBadge]="element.like" [matBadgeColor]="element.likeColor" matBadgePosition="below before" aria-label="thumb_up" >thumb_up</mat-icon>
+                    </button>
+                </mat-card-actions>
+                </mat-card>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</ng-container>
+<button mat-fab class="custom-button app-fab--absolute md-fab-bottom-right2" 
+        color="primary" [routerLink]="['/enjeu-create']">
+    <span class="mdc-fab__icon material-icons "><mat-icon>add</mat-icon></span>
+</button>

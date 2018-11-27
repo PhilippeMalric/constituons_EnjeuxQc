@@ -1,0 +1,9 @@
+<mat-chip-list  multiple id="chipList" [selectable]="true" >
+    <mat-chip *ngFor="let chip of productListSource" [selected]="chip.state" (click)="chip.state=!chip.state;changeSelected('s', chip.viewValue)" >
+      {{chip.viewValue}}
+    </mat-chip>
+</mat-chip-list>
+<button  mat-mini-fab color="accent" (click)="done()">
+    <mat-icon aria-label="arrow_forward">arrow_forward</mat-icon>
+</button>
+

@@ -1,0 +1,9 @@
+.marginTop {
+  margin-top: 50px;
+  z-index:1;
+}
+
+.myNavBar {
+  height: 50px;
+  min-height: 50px;
+}

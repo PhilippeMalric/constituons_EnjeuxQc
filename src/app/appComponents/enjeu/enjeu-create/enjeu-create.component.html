@@ -1,0 +1,70 @@
+<p>Enjeu id : {{id}}</p>
+<mat-vertical-stepper #verticalSteper [linear]="false" #stepperV>
+  <mat-step>
+      <ng-template matStepLabel>Votre enjeu</ng-template>
+      <p>Trouvez un titre à votre enjeu, 
+        écrivez une description, 
+        choisissez une catégorie et 
+        inscrivez l'opinion relié à l'enjeu.<br>
+        Il est important que l'auteur des opinions existent avant de les écrire.
+      </p>
+    <mat-horizontal-stepper [linear]="true" #stepperH>
+      <mat-step [stepControl]="titreFormGroup">
+        <form [formGroup]="titreFormGroup">
+          <ng-template matStepLabel>Le titre</ng-template>
+          <mat-form-field class="formFieldWidth90pc center">
+            <input matInput placeholder="Titre" formControlName="titre" required>
+          </mat-form-field>
+          <div class="center">
+              <button mat-button matStepperNext>Next + Prochain</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="descFormGroup">
+        <form [formGroup]="descFormGroup">
+          <ng-template matStepLabel>La description</ng-template>
+          <mat-form-field class="formFieldWidth90pc center">
+              <textarea 
+              matInput
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="3"
+              cdkAutosizeMaxRows="5" 
+              placeholder="Description" 
+              formControlName="description" required></textarea>
+          </mat-form-field>
+          <div class="center">
+            <button mat-button matStepperPrevious>Back - Retour</button>
+            <button mat-button matStepperNext>Next + Prochain</button>
+          </div>
+          </form>
+      </mat-step>
+      <mat-step [stepControl]="categorieFormGroup">
+          <form [formGroup]="categorieFormGroup">
+            <ng-template matStepLabel>La catégorie</ng-template>
+            <app-choose-categorie (categorieEvent)="categorieChosen($event,stepperV)"></app-choose-categorie>
+          </form>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </mat-step>
+  <mat-step>
+      <ng-template matStepLabel>Ajoutez des opinions</ng-template>
+      <mat-slide-toggle
+        class="center"
+        color="primary"
+        [disabled]="false"
+        (change)="onChange($event)">
+          Ajouter un opinion / Add an opinion...
+      </mat-slide-toggle>
+      <app-opinion-create *ngIf="opTogle" enjeuId={{id}} (opinionEvent)="opinionRegistered($event)"></app-opinion-create>
+    </mat-step>
+    <hr>
+    <mat-step>
+      <ng-template matStepLabel>Validez l'enjeu</ng-template>
+      <div>
+          <button mat-button matStepperPrevious>Back - Retour</button>
+          <button mat-button (click)="verticalSteper.reset()">Reset * Effacer</button>
+          <button mat-button (click)="onFormSubmitStep(titreFormGroup,descFormGroup,categorieFormGroup)">Valider l'enjeu</button>
+      </div>
+    </mat-step>
+</mat-vertical-stepper>
