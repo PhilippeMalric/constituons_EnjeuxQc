@@ -4,7 +4,7 @@
         <input [(ngModel)]="dataService.name" #ctrl="ngModel" required>
         <mat-grid-list [cols]="cols">
             <mat-grid-tile rowHeight="Fit" *ngFor="let element of enjeux;">
-            <mat-card style="margin-top: 50px;margin-bottom: 100px;">
+            <mat-card >
                 <mat-card-title>
                     {{element.titre}}
                 </mat-card-title>

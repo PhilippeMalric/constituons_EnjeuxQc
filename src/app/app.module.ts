@@ -64,6 +64,7 @@ import { NiceParagraphDirective } from './nice-paragraph.directive';
 import { MajsrvService } from './service/majsrv.service'
 import { DataService } from './sharedServices'
 
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { PersonneComponent } from './appComponents/personne/personne/personne.component';
 import { PersonneDetailComponent } from './appComponents/personne/personne-detail/personne-detail.component';
@@ -89,11 +90,13 @@ import { OpinionsTabComponent } from './appComponents/opinion/opinions-tab/opini
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { DialogAddOpinion } from './appComponents/opinion/opinion-modal/opinion-modal.component';
+import { AntonioCardsComponent } from './test/antonio-cards/antonio-cards.component';
 
 
 
 const ROUTES: Routes = [
   { path: 'home', component: HomeComponent },
+  { path: 'AntonioCards', component: AntonioCardsComponent },
   { path: 'about', component: AboutComponent },
   { path: 'testOutil', component: EnjeuxPersonnesComponent },
   { path: 'test', component: ChooseCategorieComponent },
@@ -205,9 +208,12 @@ const ROUTES: Routes = [
     
     AboutComponent,
     
-    HomeComponent
+    HomeComponent,
+    
+    AntonioCardsComponent
   ],
   imports: [
+    FlexLayoutModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,

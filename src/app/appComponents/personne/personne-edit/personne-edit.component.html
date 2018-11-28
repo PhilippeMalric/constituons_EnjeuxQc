@@ -3,17 +3,17 @@
 </div>
 <form [formGroup]="personneForm" (ngSubmit)="onFormSubmit(personneForm.value)">
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Nom" formControlName="nom"
-           [errorStateMatcher]="matcher">
-    <mat-error>
-      <span *ngIf="!personneForm.get('nom').valid && personneForm.get('nom').touched">Please enter ISBN</span>
-    </mat-error>
-  </mat-form-field>
-  <mat-form-field class="example-full-width">
     <input matInput placeholder="Prénom" formControlName="prenom"
            [errorStateMatcher]="matcher">
     <mat-error>
       <span *ngIf="!personneForm.get('prenom').valid && personneForm.get('prenom').touched">Please enter Personne Title</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Nom" formControlName="nom"
+           [errorStateMatcher]="matcher">
+    <mat-error>
+      <span *ngIf="!personneForm.get('nom').valid && personneForm.get('nom').touched">Please enter ISBN</span>
     </mat-error>
   </mat-form-field>
   <mat-form-field class="example-full-width">
