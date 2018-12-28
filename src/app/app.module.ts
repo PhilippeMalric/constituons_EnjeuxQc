@@ -92,7 +92,13 @@ import { HomeComponent } from './home/home.component';
 import { DialogAddOpinion } from './appComponents/opinion/opinion-modal/opinion-modal.component';
 import { AntonioCardsComponent } from './test/antonio-cards/antonio-cards.component';
 
+import { AuthenticationService } from './service/authentication.service';
+import { AuthGuardService } from './service/auth-guard.service';
 
+
+import { ProfileComponent } from './appComponents/profile/profile.component';
+import { LoginComponent } from './appComponents/login/login.component';
+import { RegisterComponent } from './appComponents/register/register.component';
 
 const ROUTES: Routes = [
   { 
@@ -111,22 +117,22 @@ const ROUTES: Routes = [
   {
     path: 'personnes',
     component: PersonneComponent,
-    data: { title: 'Personne List' }
+    data: { title: 'Personne List' }, canActivate: [AuthGuardService]
   },
   {
-    path: 'personne-details/:id',
+    path: 'personne-details/:id', canActivate: [AuthGuardService],
     component: PersonneDetailComponent,
     data: { title: 'Personne Details' }
   },
   {
-    path: 'personne-create',
+    path: 'personne-create' , canActivate: [AuthGuardService],
     component: PersonneCreateComponent,
     data: { title: 'Create Personne' }
   },
   {
     path: 'personne-edit/:id',
     component: PersonneEditComponent,
-    data: { title: 'Edit Personne' }
+    data: { title: 'Edit Personne' }, canActivate: [AuthGuardService]
   },
   {
     path: 'enjeux',
@@ -171,6 +177,9 @@ const ROUTES: Routes = [
     component: OpinionEditComponent,
     data: { title: 'Edit Opinions' }
   },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
   {
     path: '',
     redirectTo:'home',
@@ -180,6 +189,9 @@ const ROUTES: Routes = [
 
 @NgModule({
   declarations: [
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent,
     DialogAddOpinion,
     AppComponent,
     PersonneComponent,
@@ -261,7 +273,11 @@ const ROUTES: Routes = [
     SidebarModule,
     AccordionModule
   ],
-  providers: [MajsrvService,DataService],
+  providers: [
+    MajsrvService,
+    DataService,
+    AuthenticationService, 
+    AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

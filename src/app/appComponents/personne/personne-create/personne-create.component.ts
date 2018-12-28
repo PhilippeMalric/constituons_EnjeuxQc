@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../../../api.service';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { AuthenticationService, UserDetails } from 'src/app/service/authentication.service';
 
 @Component({
   selector: 'app-personne-create',
@@ -14,8 +15,9 @@ export class PersonneCreateComponent implements OnInit {
   prenom:string='';
   slogan:string='';
   photo:string='';
-
-  constructor(private router: Router, private api: ApiService, private formBuilder: FormBuilder) { }
+  details: UserDetails;
+  
+  constructor(private auth: AuthenticationService, private router: Router, private api: ApiService, private formBuilder: FormBuilder) { }
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -29,6 +31,13 @@ export class PersonneCreateComponent implements OnInit {
 
 
   ngOnInit() {
+
+    this.auth.profile().subscribe(user => {
+      this.details = user;
+    }, (err) => {
+      console.error(err);
+    });
+  
     this.firstFormGroup = this.formBuilder.group({
       nom: ['', Validators.required],
       prenom: ['', Validators.required]
@@ -57,7 +66,8 @@ export class PersonneCreateComponent implements OnInit {
         prenom:form1.value.prenom,
         slogan:form2.value.slogan,
         description:form2.value.description,
-        photo:"/assets/images/smile/sm"+(1+Math.floor(Math.random() * 12))+".jpeg"
+        photo:"/assets/images/smile/sm"+(1+Math.floor(Math.random() * 12))+".jpeg",
+        userId: this.details._id
       })
       .subscribe(res => {
           let id = res['_id'];

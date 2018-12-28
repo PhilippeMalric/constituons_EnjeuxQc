@@ -30,6 +30,10 @@ var PersonneSchema = new mongoose.Schema({
   photo: {
     type: String
   },
+  createBy_userId:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
   opinions:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'opinion'

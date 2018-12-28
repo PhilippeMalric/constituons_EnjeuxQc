@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../sharedServices';
+import { AuthenticationService, UserDetails } from '../service/authentication.service';
 
 @Component({
   selector: 'app-home',
@@ -9,8 +10,9 @@ import { DataService } from '../sharedServices';
 export class HomeComponent implements OnInit {
 
   checked:Boolean
+  details: UserDetails;
 
-  constructor(public dataService: DataService) { }
+  constructor(private auth: AuthenticationService, public dataService: DataService) { }
 
   ngOnInit() {
   }

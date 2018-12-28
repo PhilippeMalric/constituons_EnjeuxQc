@@ -2,11 +2,25 @@
 <ng-container>
   <div class="container">
     <h1>Plateforme EnjeuxQc</h1> 
-    <p>Bienvenue sur la plateforme Enjeux Québec.</p>
     <img id="logoHome" src="assets/logo/newLogo.png"/>
-    <hr>
-    <mat-checkbox [(ngModel)]="checked">Cochez si vous voulez vous identifier</mat-checkbox>
-    <app-personne-create *ngIf="checked"></app-personne-create>
+    <div *ngIf="!auth.isLoggedIn()">
+      <p>Bienvenue sur la plateforme Enjeux Québec.</p>
+      <hr>
+      <mat-checkbox  [(ngModel)]="checked">Cochez si vous voulez vous identifier</mat-checkbox>
+      <div *ngIf="checked">
+        <mat-tab-group>
+          <mat-tab label="Login">
+            <app-login></app-login>
+          </mat-tab>
+          <mat-tab label="Register">
+            <app-register></app-register>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+    <div *ngIf="auth.isLoggedIn()">
+        <p>Bienvenue {{auth.getUserDetails()?.name}} sur la plateforme Enjeux Québec.</p>
+    </div>
     <br>
     <h2>Introduction</h2>
     <p>Cette plateforme a été conçue pour faciliter les échanges sur des enjeux touchant les Québécois.</p>

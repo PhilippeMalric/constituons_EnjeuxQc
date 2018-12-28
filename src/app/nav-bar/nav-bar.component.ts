@@ -1,5 +1,6 @@
-import {MediaMatcher} from '@angular/cdk/layout';
+
 import {ChangeDetectorRef, Component, OnDestroy, ViewEncapsulation, Input} from '@angular/core';
+import { AuthenticationService } from '../service/authentication.service';
 
 /** @title Responsive sidenav */
 @Component({
@@ -15,7 +16,7 @@ export class NavBarComponent implements OnDestroy {
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef) {}
+  constructor(public auth: AuthenticationService, changeDetectorRef: ChangeDetectorRef) {}
 
 ngOnInit(){
   this.opened = true;

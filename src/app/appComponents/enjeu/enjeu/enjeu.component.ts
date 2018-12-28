@@ -16,6 +16,7 @@ export class EnjeuComponent implements OnInit {
   catsChosens: string[] = [] 
 
   enjeux: any = [];
+  enjeuxTabs: any = {}
   enjeuxG: any = [];
   displayedColumns = ['titre', 'description', 'badges'];
   dataSource = new EnjeuDataSource(this.api);
@@ -91,34 +92,40 @@ export class EnjeuComponent implements OnInit {
     }
     this.api.getEnjeux()
       .subscribe(res => {
+        if(res.length > 10){
+          res = res.slice(0, 10)
+        }
         console.log(res);
-       let catD = {}
+        let catD = {}
         for(let e of res){
           e.likeColor = "accent"
           e.dontLikeColor = "accent"
           e.checked = false
           for (let s of e.categories){
-            catD[s]=1
+            catD[s.replace("_"," ").replace("é","e").replace("'","_")]=1
           }          
         }
         this.catList = Object.keys(catD)
+        
         this.enjeuxG = res;
-        if(this.catsChosens.length > 0){
-          
-          for (let enj of res){
-            for (let ca of enj.categories){
-              for (let catChosen in this.catsChosens){
-                if(ca == catChosen){
-                  this.enjeux.push(enj);
+        this.enjeux = res;
+        for (let enj of res){
+          console.log("enj : ",enj)
+          for (let ca of enj.categories){
+            ca = ca.replace("_"," ").replace("é","e").replace("'","_")
+            for (let catChosen of this.catList){
+              if(ca == catChosen){
+                console.log("--enj : ",enj)
+                if(ca  in this.enjeuxTabs){
+                  this.enjeuxTabs[ca].push(enj);
+                }
+                else{
+                  this.enjeuxTabs[ca] = [enj];
                 }
               }
             }
           }
         }
-        else{
-          this.enjeux = res;
-        }
-
       }, err => {
         console.log(err);
       });
@@ -139,25 +146,26 @@ export class EnjeuComponent implements OnInit {
 
   changeEnjeux(){
 
-    console.log("this.cat",this.cat)
+    console.log("this.cat : ",this.cat)
     let st = "";
-      this.catsChosens = []
-      for(let s of this.cat.value){
+    this.catsChosens = []
+    for(let s of this.cat.value){
 
-        this.catsChosens.push( s.replace("_"," ").replace("é","e").replace("'","_"))
+      this.catsChosens.push( s.replace("_"," ").replace("é","e").replace("'","_"))
 
     }
     if(this.catsChosens.length > 0){
-          
-      for (let enj of this.enjeuxG){
-        for (let ca of enj.categories){
-          for (let catChosen in this.catsChosens){
-            if(ca == catChosen){
-              this.enjeux.push(enj);
-            }
-          }
+      let enjD = {}
+      console.log("this.catsChosens : ",this.catsChosens)
+      console.log("this.enjeuxTabs : ",this.enjeuxTabs)
+      for(let cat of this.catsChosens){
+        for (let e of this.enjeuxTabs[cat]){
+          enjD[e.titre] = e
         }
+        
       }
+      this.enjeux = Object.values(enjD)  ;
+      
     }
     else{
       this.enjeux = this.enjeuxG;

@@ -100,7 +100,8 @@ var p = new Personne({
   prenom : d.prenom,
   description : d.description,
   slogan : d.slogan,
-  photo : d.photo
+  photo : d.photo,
+  createBy_userId:d.userId
 })
 
 p.save()
