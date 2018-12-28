@@ -1,10 +1,18 @@
-<mat-grid-list [cols]="cols">
-    <mat-grid-tile *ngFor="let element of opinions">
-      <mat-card>
+<div class="container" fxLayout="row wrap"  fxLayout.xs="column"  fxLayoutGap="0.5%" fxLayoutAlign="center">
+        <ng-container *ngFor="let element of opinions; index as i;">  
+          <mat-card fxFlex.xs="100" fxFlex.sm="40" fxFlex.md="30" fxFlex.gt-md="20"   >
+              <mat-slide-toggle
+              class="slider"
+              color="primary"
+              [checked]="element.checked"
+              [disabled]="disabled"
+              (change)="change(element)" >
+            Slide me!
+          </mat-slide-toggle>
           <mat-card-title>
               {{element.title}}
           </mat-card-title>
-          <mat-card-content>
+          <mat-card-content *ngIf="element.checked">
               {{element.description}}
           </mat-card-content>
           <mat-card-subtitle>
@@ -22,6 +30,6 @@
               </button>
           </mat-card-actions>
         </mat-card>
-    </mat-grid-tile>
-</mat-grid-list>
+    </ng-container>
+</div>
 

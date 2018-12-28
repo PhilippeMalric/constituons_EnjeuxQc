@@ -17,7 +17,7 @@ var EnjeuSchema = new mongoose.Schema({
   }],
     titre: String,
     description: String,
-    categorie: String,
+    categories: [String],
     badges: String,
     opinions:[{
         type: mongoose.Schema.Types.ObjectId,

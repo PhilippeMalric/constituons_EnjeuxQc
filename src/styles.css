@@ -1,6 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+#logoHome{
+    margin-bottom: 30px;
+    float: right;
+    height: -webkit-fill-available;
+    width: auto;
+}
+
 .md-fab-bottom-right2 {
     top: auto !important;
     right: 20px !important;
@@ -14,6 +21,7 @@
       text-align: center; 
       margin: auto;
       margin-top: 20px;
+      margin-bottom: 20px;
       width: fit-content;
 }
 
@@ -37,7 +45,7 @@
 
 .mat-card{
     margin: 15px;
-    
+    height: fit-content;
 }
 
 .mat-card-subtitle{
@@ -77,3 +85,9 @@
     max-width: 800px;
     min-height: 1000px
  }
+
+
+.slider{
+    float: right;
+    padding: 10px;
+}

@@ -43,6 +43,9 @@ if(this.enjeuId != ""){
         e.dontLikeColor = "accent"
       }
       this.opinions = res;
+      for(let e of this.opinions){
+        e.checked = false
+      }
     }, err => {
       console.log(err);
     });
@@ -58,6 +61,9 @@ if(this.enjeuId != ""){
         e.dontLikeColor = "accent"
       }
       this.opinions = res;
+      for(let e of this.opinions){
+        e.checked = false
+      }
     }, err => {
       console.log(err);
     });
@@ -65,23 +71,17 @@ if(this.enjeuId != ""){
   }
   }
 
+  change(e:any){
 
-  onResize(event) {
-    console.log("resize width : ",window.screen.width)
-
-    if(window.screen.width > 780){
-      this.cols = 3;
-    }
-    if (window.screen.width < 780 && window.screen.width > 600) { // 768px portrait
-      this.cols = 2;
+    if(e.checked){
+      e.checked=false;
     }
     else{
-      if(window.screen.width < 600){
-        this.cols = 1;
-      }
-
+      e.checked=true;
     }
+
   }
+
 
   
   addLike(e){

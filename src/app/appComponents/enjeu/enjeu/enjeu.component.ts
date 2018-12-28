@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { ApiService } from '../../../api.service';
 import { DataSource } from '@angular/cdk/collections';
 import { DataService } from 'src/app/sharedServices';
+import {FormControl} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-enjeu',
@@ -11,14 +13,22 @@ import { DataService } from 'src/app/sharedServices';
 })
 export class EnjeuComponent implements OnInit {
 
-  enjeux: any;
+  catsChosens: string[] = [] 
+
+  enjeux: any = [];
+  enjeuxG: any = [];
   displayedColumns = ['titre', 'description', 'badges'];
   dataSource = new EnjeuDataSource(this.api);
   cols:Number = 3
+  cat = new FormControl();
+  catList: string[] = [];
 
 
+  constructor(private router: Router, private route: ActivatedRoute,private api: ApiService, public dataService: DataService) { }
 
-  constructor(private api: ApiService, public dataService: DataService) { }
+  ngAfterViewInit(){
+    console.log("ngAfterViewInit()")
+  }
 
   addLike(e){
     let id = e._id
@@ -68,6 +78,8 @@ export class EnjeuComponent implements OnInit {
   
 
   ngOnInit() {
+
+
     if (window.screen.width < 780 && window.screen.width > 600) { // 768px portrait
       this.cols = 2;
     }
@@ -80,34 +92,78 @@ export class EnjeuComponent implements OnInit {
     this.api.getEnjeux()
       .subscribe(res => {
         console.log(res);
-       
+       let catD = {}
         for(let e of res){
           e.likeColor = "accent"
           e.dontLikeColor = "accent"
+          e.checked = false
+          for (let s of e.categories){
+            catD[s]=1
+          }          
         }
-        this.enjeux = res;
+        this.catList = Object.keys(catD)
+        this.enjeuxG = res;
+        if(this.catsChosens.length > 0){
+          
+          for (let enj of res){
+            for (let ca of enj.categories){
+              for (let catChosen in this.catsChosens){
+                if(ca == catChosen){
+                  this.enjeux.push(enj);
+                }
+              }
+            }
+          }
+        }
+        else{
+          this.enjeux = res;
+        }
+
       }, err => {
         console.log(err);
       });
   }
 
-  onResize(event) {
-    console.log("resize width : ",window.screen.width)
 
-    if(window.screen.width > 780){
-      this.cols = 3;
-    }
-    if (window.screen.width < 780 && window.screen.width > 600) { // 768px portrait
-      this.cols = 2;
+  change(e:any){
+
+    if(e.checked){
+      e.checked=false;
     }
     else{
-      if(window.screen.width < 600){
-        this.cols = 1;
-      }
-
+      e.checked=true;
     }
+
   }
 
+
+  changeEnjeux(){
+
+    console.log("this.cat",this.cat)
+    let st = "";
+      this.catsChosens = []
+      for(let s of this.cat.value){
+
+        this.catsChosens.push( s.replace("_"," ").replace("é","e").replace("'","_"))
+
+    }
+    if(this.catsChosens.length > 0){
+          
+      for (let enj of this.enjeuxG){
+        for (let ca of enj.categories){
+          for (let catChosen in this.catsChosens){
+            if(ca == catChosen){
+              this.enjeux.push(enj);
+            }
+          }
+        }
+      }
+    }
+    else{
+      this.enjeux = this.enjeuxG;
+    }
+  
+  }
 }
 
 export class EnjeuDataSource extends DataSource<any> {

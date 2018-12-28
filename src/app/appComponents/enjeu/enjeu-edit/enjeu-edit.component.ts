@@ -21,7 +21,7 @@ export class EnjeuEditComponent implements OnInit {
   id:string = '';
   titre:string = '';
   description:string = '';
-  categorie:string = '';
+  categories:string[] = [];
   badges:string = '';
   opinions:any[];
   opsID:string[] = [];
@@ -38,8 +38,6 @@ export class EnjeuEditComponent implements OnInit {
       titre: new FormControl()})
     this.descFormGroup = this.formBuilder.group({
       description: new FormControl()});
-    this.catFormGroup = this.formBuilder.group({
-      categorie: new FormControl()});
     this.badgeFormGroup = this.formBuilder.group({
       badges:new FormControl()});
    
@@ -55,9 +53,6 @@ export class EnjeuEditComponent implements OnInit {
       this.descFormGroup.setValue({
         description:data.description
       })
-      this.catFormGroup.setValue({
-        categorie:data.categorie
-      })
       this.badgeFormGroup.setValue({
         badges:data.badges
       })
@@ -71,7 +66,7 @@ export class EnjeuEditComponent implements OnInit {
 
     titre: form1.value.titre,
     description: form2.value.description,
-    categorie: form3.value.categorie,
+    categories: this.categories,
     badges: form4.value.badges,
 
     })
@@ -105,4 +100,12 @@ export class EnjeuEditComponent implements OnInit {
   enjeuDetails() {
     this.router.navigate(['/enjeu-details', this.id]);
   }
+
+  categorieChosen(event:string[]){
+    console.log(event)
+    this.categories = event;
+   
+  }
+
+
 }

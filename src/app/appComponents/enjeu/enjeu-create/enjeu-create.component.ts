@@ -22,7 +22,7 @@ export class EnjeuCreateComponent implements OnInit {
 
   titre:string='';
   description:string='';
-  categorie:string='';
+  cats:string[]
   badges:string='';
 
   text=`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
@@ -41,7 +41,7 @@ export class EnjeuCreateComponent implements OnInit {
     this.api.postEnjeu({
       'titre' :"",
       'description' :"",
-      'categorie' :"",
+      'categorie' :[],
       'badges' : this.createBadges2()
     })
       .subscribe(res => {
@@ -75,7 +75,7 @@ export class EnjeuCreateComponent implements OnInit {
     this.api.updateEnjeu(this.id,{
       'titre' :form1.value.titre,
       'description' :form2.value.description,
-      'categorie' :form3.value.categorie,
+      'categories' :this.cats,
       'opsId' : this.opsID
     })
       .subscribe(res => {
@@ -93,14 +93,15 @@ export class EnjeuCreateComponent implements OnInit {
     }
     return s.join(" ");
   }
+
   multiplePost(){
 
     console.log("multiple")
     let interval = setInterval(() => {
-      this.api.updateEnjeu(this.id, {
+      this.api.postEnjeu( {
         'titre' :"titre"+Math.floor(Math.random() * 100),
         'description' :this.text.substring(20 + Math.floor(Math.random() * (this.text.length - 20))),
-        'categorie' :"categorie"+Math.floor(Math.random() * 100),
+        'categories' :(Math.random() > 0.5)?["La démocratie"]:["La santé"],
         'badges' : this.createBadges2(),
         'opsId' : []
       })
@@ -115,8 +116,8 @@ export class EnjeuCreateComponent implements OnInit {
       this.router.navigate(['/enjeux'])
       },1500)
 
-
   }
+
   opinionRegistered = (event) =>{
     console.log("event",event)
     this.opsID.push(event)
@@ -125,6 +126,8 @@ export class EnjeuCreateComponent implements OnInit {
 
 
   categorieChosen(event:string[],stepper: MatStepper){
+    console.log(event)
+    this.cats = event;
     (<FormControl>this.categorieFormGroup.controls['categorie'])
       .setValue(event, { onlySelf: true });
       stepper.next()

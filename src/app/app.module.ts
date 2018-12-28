@@ -95,7 +95,10 @@ import { AntonioCardsComponent } from './test/antonio-cards/antonio-cards.compon
 
 
 const ROUTES: Routes = [
-  { path: 'home', component: HomeComponent },
+  { 
+    path: 'home', 
+    component: HomeComponent
+  },
   { path: 'AntonioCards', component: AntonioCardsComponent },
   { path: 'about', component: AboutComponent },
   { path: 'testOutil', component: EnjeuxPersonnesComponent },
@@ -103,7 +106,7 @@ const ROUTES: Routes = [
   {
     path: 'enjeuxTab',
     component: EnjeuxTabComponent,
-    data: { title: "Tableau d'enjeu" }
+    data: { cat: [] }
   },
   {
     path: 'personnes',

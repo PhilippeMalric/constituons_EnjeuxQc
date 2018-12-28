@@ -1,14 +1,31 @@
-<ng-container>
-    <div class="container">
-        <p>Votre nom : </p>
-        <input [(ngModel)]="dataService.name" #ctrl="ngModel" required>
-        <mat-grid-list [cols]="cols">
-            <mat-grid-tile rowHeight="Fit" *ngFor="let element of enjeux;">
-            <mat-card >
+<div>
+<div id="dropdownCategorie" class=center>
+   
+    <mat-form-field>
+        <mat-select (selectionChange)="changeEnjeux()" placeholder="Catégorie" [formControl]="cat" multiple>
+            <mat-select-trigger>
+            Les catégories
+            </mat-select-trigger>
+            <mat-option *ngFor="let c of catList" [value]="c">{{c}}</mat-option>
+        </mat-select>
+    </mat-form-field>  
+
+    </div>
+    <div class="container" fxLayout="row wrap"  fxLayout.xs="column"  fxLayoutGap="0.5%" fxLayoutAlign="center">
+        <ng-container *ngFor="let element of enjeux; index as i;">  
+            <mat-card fxFlex.xs="100" fxFlex.sm="40" fxFlex.md="30" fxFlex.gt-md="20"   >
+                <mat-slide-toggle
+                class="slider"
+                color="primary"
+                [checked]="element.checked"
+                [disabled]="disabled"
+                (change)="change(element)" >
+            Slide me!
+            </mat-slide-toggle>
                 <mat-card-title>
                     {{element.titre}}
                 </mat-card-title>
-                <mat-card-content style="word-break: break-all;padding-right: 20px; text-align: justify;">
+                <mat-card-content *ngIf="element.checked" >
                     <p>{{element.description}}</p>
                 </mat-card-content>
                 <mat-card-subtitle style="min-height:75px">
@@ -25,11 +42,12 @@
                         <mat-icon #dontLike [matBadge]="element.like" [matBadgeColor]="element.likeColor" matBadgePosition="below before" aria-label="thumb_up" >thumb_up</mat-icon>
                     </button>
                 </mat-card-actions>
-                </mat-card>
-            </mat-grid-tile>
-        </mat-grid-list>
+            </mat-card>
+        </ng-container>
     </div>
-</ng-container>
+</div>
+
+
 <button mat-fab class="custom-button app-fab--absolute md-fab-bottom-right2" 
         color="primary" [routerLink]="['/enjeu-create']">
     <span class="mdc-fab__icon material-icons "><mat-icon>add</mat-icon></span>

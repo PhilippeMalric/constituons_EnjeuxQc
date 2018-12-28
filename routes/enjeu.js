@@ -107,7 +107,7 @@ router.post('/', function(req, res) {
     dontLikeBy: [],
     titre : d.titre,
     description : d.description,
-    categorie : d.categorie,
+    categories : d.categories,
     badges : d.badges,
     opinions : []
   })

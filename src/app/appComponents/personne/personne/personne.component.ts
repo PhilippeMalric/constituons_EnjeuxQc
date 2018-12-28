@@ -15,6 +15,7 @@ export class PersonneComponent implements OnInit {
   dataSource = new PersonneDataSource(this.api);
   cols = 4;
   
+
   constructor(private api: ApiService) { }
 
   ngOnInit() {
@@ -26,10 +27,26 @@ export class PersonneComponent implements OnInit {
       .subscribe(res => {
         console.log(res);
         this.personnes = res;
+        for(let e of this.personnes){
+          e.checked = false
+        }
       }, err => {
         console.log(err);
       });
   }
+
+  change(e:any){
+
+    if(e.checked){
+      e.checked=false;
+    }
+    else{
+      e.checked=true;
+    }
+
+  }
+
+
 }
 
 export class PersonneDataSource extends DataSource<any> {

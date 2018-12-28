@@ -7,11 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AntonioCardsComponent implements OnInit {
 
-  cards:Number[] = [1,2,3,4,5,6,7,8]
-
+  cards:any[] = [{checked:false},{checked:false},{checked:false},{checked:false},{checked:false},{checked:false},{checked:false},{checked:false}]
+  checked : boolean = true;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  change(e:any){
+
+    if(e.checked){
+      e.checked=false;
+    }
+    else{
+      e.checked=true;
+    }
+
   }
 
 }
