@@ -25,7 +25,7 @@ export class PersonneComponent implements OnInit {
 
     this.api.getPersonnes()
       .subscribe(res => {
-        console.log(res);
+        //console.log(res);
         this.personnes = res;
         for(let e of this.personnes){
           e.checked = false

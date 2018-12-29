@@ -1,14 +1,14 @@
 <div>
-<div id="dropdownCategorie" class=center>
+    <div id="dropdownCategorie" class=center>
    
-    <mat-form-field>
-        <mat-select (selectionChange)="changeEnjeux()" placeholder="Catégorie" [formControl]="cat" multiple>
-            <mat-select-trigger>
-            Les catégories
-            </mat-select-trigger>
-            <mat-option *ngFor="let c of catList" [value]="c">{{c}}</mat-option>
-        </mat-select>
-    </mat-form-field>  
+        <mat-form-field>
+            <mat-select (selectionChange)="changeEnjeux()" placeholder="Catégorie" [formControl]="cat" multiple>
+                <mat-select-trigger>
+                Les catégories
+                </mat-select-trigger>
+                <mat-option *ngFor="let c of catList" [value]="c">{{c}}</mat-option>
+            </mat-select>
+        </mat-form-field>  
 
     </div>
     <div class="container" fxLayout="row wrap"  fxLayout.xs="column"  fxLayoutGap="0.5%" fxLayoutAlign="center">
@@ -20,8 +20,8 @@
                 [checked]="element.checked"
                 [disabled]="disabled"
                 (change)="change(element)" >
-            Slide me!
-            </mat-slide-toggle>
+                Slide me!
+                </mat-slide-toggle>
                 <mat-card-title>
                     {{element.titre}}
                 </mat-card-title>
@@ -46,7 +46,6 @@
         </ng-container>
     </div>
 </div>
-
 
 <button mat-fab class="custom-button app-fab--absolute md-fab-bottom-right2" 
         color="primary" [routerLink]="['/enjeu-create']">

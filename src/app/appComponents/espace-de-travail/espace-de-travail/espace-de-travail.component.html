@@ -1,0 +1,33 @@
+ 
+<div class="container" fxLayout="row wrap"  fxLayout.xs="column"  fxLayoutGap="0.5%" fxLayoutAlign="center">
+  <ng-container *ngFor="let element of espaces; index as i;">  
+    <mat-card fxFlex.xs="100" fxFlex.sm="40" fxFlex.md="30" fxFlex.gt-md="20"   >
+        
+        <mat-card-title>
+            {{element.nom}}
+        </mat-card-title>
+        <mat-card-content  >
+            <p>{{element.description}}</p>
+        </mat-card-content>
+        <mat-card-subtitle style="min-height:75px">
+          test
+        </mat-card-subtitle>
+        <mat-card-actions class="center">
+            <button  mat-mini-fab [routerLink]="['/espace-de-travail-details/', element._id]" color="primary">
+                <mat-icon aria-label="details">details</mat-icon>
+            </button>
+        </mat-card-actions>
+    </mat-card>
+  </ng-container>
+</div>
+
+
+<button mat-fab class="custom-button app-fab--absolute md-fab-bottom-right2" 
+        color="primary" [routerLink]="['/espace-de-travail-create']">
+    <span class="mdc-fab__icon material-icons "><mat-icon>add</mat-icon></span>
+</button>
+
+<button mat-fab class="custom-button app-fab--absolute md-fab-bottom-right3" 
+        color="warn" (click)="clean()">
+    <span class="mdc-fab__icon material-icons "><mat-icon>add</mat-icon></span>
+</button>

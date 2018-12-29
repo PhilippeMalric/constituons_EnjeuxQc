@@ -15,6 +15,10 @@ export class HomeComponent implements OnInit {
   constructor(private auth: AuthenticationService, public dataService: DataService) { }
 
   ngOnInit() {
+
+    
   }
+
+  
 
 }

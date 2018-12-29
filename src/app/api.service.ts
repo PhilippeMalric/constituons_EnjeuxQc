@@ -6,6 +6,8 @@ import { catchError, tap, map } from 'rxjs/operators';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
+const apiUrlEspaceDeTravail = "/api/espaceDeTravail";
+const apiUrlUsers = "/api/users";
 const apiUrlPersonne = "/api/personne";
 const apiUrlEnjeu = "/api/enjeu";
 const apiUrlOpinion = "/api/opinion";
@@ -162,8 +164,66 @@ remDontLikeToPersonne(id): Observable<any> {
     catchError(this.handleError));
 }
 
-//------------------------------------------enjeux
+//------------------------------------------users
 
+getUsers(): Observable<any> {
+
+  console.log("apiUrlUsers : "+apiUrlUsers)
+
+  return this.http.get(apiUrlUsers, httpOptions).pipe(
+    map(this.extractData),
+    catchError(this.handleError));
+}
+
+//------------------------------------------EspacesDeTravail
+
+cleanEspacesDeTravail(): Observable<any> {
+
+  console.log("apiUrlEspaceDeTravail : "+apiUrlEspaceDeTravail+"/clean")
+
+  return this.http.get(apiUrlEspaceDeTravail+"/clean", httpOptions).pipe(
+    map(this.extractData),
+    catchError(this.handleError));
+}
+
+getEspacesDeTravail(): Observable<any> {
+
+  console.log("apiUrlEspaceDeTravail : "+apiUrlEspaceDeTravail)
+
+  return this.http.get(apiUrlEspaceDeTravail, httpOptions).pipe(
+    map(this.extractData),
+    catchError(this.handleError));
+}
+
+getEspaceDeTravail(id: string): Observable<any> {
+  const url = `${apiUrlEspaceDeTravail}/${id}`;
+  return this.http.get(url, httpOptions).pipe(
+    map(this.extractData),
+    catchError(this.handleError));
+}
+
+postEspaceDeTravail(data): Observable<any> {
+  return this.http.post(apiUrlEspaceDeTravail, data, httpOptions)
+    .pipe(
+      catchError(this.handleError)
+    );
+}
+
+updateEspaceDeTravail(id: string, data): Observable<any> {
+  const url = `${apiUrlEspaceDeTravail}/${id}`;
+  return this.http.put(url, data, httpOptions)
+    .pipe(
+      catchError(this.handleError)
+    );
+}
+
+deleteEspaceDeTravail(id: string): Observable<{}> {
+  const url = `${apiUrlEspaceDeTravail}/${id}`;
+  return this.http.delete(url, httpOptions)
+    .pipe(
+      catchError(this.handleError)
+    );
+}
 
   getEnjeux(): Observable<any> {
 

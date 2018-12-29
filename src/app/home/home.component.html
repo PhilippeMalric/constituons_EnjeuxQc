@@ -3,7 +3,7 @@
   <div class="container">
     <h1>Plateforme EnjeuxQc</h1> 
     <img id="logoHome" src="assets/logo/newLogo.png"/>
-    <div *ngIf="!auth.isLoggedIn()">
+    <div class="center" *ngIf="!auth.isLoggedIn()">
       <p>Bienvenue sur la plateforme Enjeux Québec.</p>
       <hr>
       <mat-checkbox  [(ngModel)]="checked">Cochez si vous voulez vous identifier</mat-checkbox>

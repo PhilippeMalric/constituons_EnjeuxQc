@@ -20,8 +20,8 @@ module.exports.register = function(req, res) {
 
   user.name = req.body.name;
   user.email = req.body.email;
-  user.authorModel = []
-
+  user.personneCreated = [];
+  user.associatedPersonne = null;
   user.setPassword(req.body.password);
 
   user.save(function(err) {

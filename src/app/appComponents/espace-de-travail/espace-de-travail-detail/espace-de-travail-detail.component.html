@@ -1,0 +1,22 @@
+<div style="margin:auto;display: table;">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title><h2>{{espaceDeTravail.nom}}</h2></mat-card-title>
+        <mat-card-subtitle>{{espaceDeTravail.description}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+          <div class="center">
+            <mat-slide-toggle
+              color="primary"
+              [disabled]="false">
+                ?
+            </mat-slide-toggle>
+           
+          </div>
+      </mat-card-content>
+      <mat-card-actions class="center">
+        <a mat-raised-button color="primary" [routerLink]="['/espace-de-travail-edit', espaceDeTravail._id]"><mat-icon>edit</mat-icon></a>
+        <a mat-raised-button color="warn" (click)="deleteEspaceDeTravail(espaceDeTravail._id)"><mat-icon>delete</mat-icon></a>
+      </mat-card-actions>
+    </mat-card>
+  </div>

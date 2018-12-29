@@ -64,7 +64,7 @@ var authApiRouter = require('./routes/auth');
 var personneApiRouter = require('./routes/personne');
 var enjeuApiRouter = require('./routes/enjeu');
 var opinionApiRouter = require('./routes/opinion');
-
+var espaceDeTravail = require('./routes/espace-de-travail');
 
 var cors = require('cors')
 
@@ -115,6 +115,9 @@ app.use('/api', authApiRouter);
 app.use('/api/personne', personneApiRouter);
 app.use('/api/enjeu', enjeuApiRouter);
 app.use('/api/opinion', opinionApiRouter);
+app.use('/api/espaceDeTravail', espaceDeTravail);
+
+
 
 app.use(express.static(__dirname + '/dist'));
 app.get('/*', function (req, res) {

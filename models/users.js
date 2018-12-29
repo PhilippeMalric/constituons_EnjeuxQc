@@ -12,7 +12,11 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  authorModel: {
+  personneCreated: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'personne'
+  }],
+  associatedPersonne: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'personne'
   },

@@ -16,3 +16,13 @@ module.exports.profileRead = function(req, res) {
   }
 
 };
+module.exports.getUsers = function(req, res) {
+
+    User
+      .find()
+      .exec(function(err, users) {
+        console.log("users : ",users)
+        res.status(200).json(users.map(u => {return {id:u._id,name:u.name}}));
+      });
+
+};

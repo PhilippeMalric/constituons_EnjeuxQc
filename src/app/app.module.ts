@@ -81,6 +81,11 @@ import { OpinionDetailComponent } from './appComponents/opinion/opinion-detail/o
 import { OpinionCreateComponent } from './appComponents/opinion/opinion-create/opinion-create.component';
 import { OpinionEditComponent } from './appComponents/opinion/opinion-edit/opinion-edit.component';
 
+import { EspaceDeTravailComponent } from './appComponents/espace-de-travail/espace-de-travail/espace-de-travail.component';
+import { EspaceDeTravailCreateComponent } from './appComponents/espace-de-travail/espace-de-travail-create/espace-de-travail-create.component';
+import { EspaceDeTravailDetailComponent } from './appComponents/espace-de-travail/espace-de-travail-detail/espace-de-travail-detail.component';
+import { EspaceDeTravailEditComponent } from './appComponents/espace-de-travail/espace-de-travail-edit/espace-de-travail-edit.component';
+
 import { EnjeuxPersonnesComponent } from './enjeux-personnes/enjeux-personnes.component';
 import { BadgeComponent } from './badge/badge.component';
 import { ChooseCategorieComponent } from './appComponents/enjeu/choose-categorie/choose-categorie.component';
@@ -100,10 +105,32 @@ import { ProfileComponent } from './appComponents/profile/profile.component';
 import { LoginComponent } from './appComponents/login/login.component';
 import { RegisterComponent } from './appComponents/register/register.component';
 
+import {ScrollDispatchModule} from '@angular/cdk/scrolling';
+
 const ROUTES: Routes = [
   { 
     path: 'home', 
     component: HomeComponent
+  },
+  {
+    path: 'espace-de-travail', canActivate: [AuthGuardService],
+    component: EspaceDeTravailComponent,
+    data: { title: 'espace-de-travail' }
+  },
+  {
+    path: 'espace-de-travail-details/:id', canActivate: [AuthGuardService],
+    component: EspaceDeTravailDetailComponent,
+    data: { title: 'espace-de-travail Details' }
+  },
+  {
+    path: 'espace-de-travail-create' , canActivate: [AuthGuardService],
+    component: EspaceDeTravailCreateComponent,
+    data: { title: 'Create EspaceDeTravail' }
+  },
+  {
+    path: 'espace-de-travail-edit/:id',
+    component: EspaceDeTravailEditComponent,
+    data: { title: 'Edit EspaceDeTravail' }, canActivate: [AuthGuardService]
   },
   { path: 'AntonioCards', component: AntonioCardsComponent },
   { path: 'about', component: AboutComponent },
@@ -225,9 +252,18 @@ const ROUTES: Routes = [
     
     HomeComponent,
     
-    AntonioCardsComponent
+    AntonioCardsComponent,
+    
+    EspaceDeTravailComponent,
+    
+    EspaceDeTravailCreateComponent,
+    
+    EspaceDeTravailDetailComponent,
+    
+    EspaceDeTravailEditComponent
   ],
   imports: [
+    ScrollDispatchModule,
     FlexLayoutModule,
     BrowserModule,
     BrowserAnimationsModule,

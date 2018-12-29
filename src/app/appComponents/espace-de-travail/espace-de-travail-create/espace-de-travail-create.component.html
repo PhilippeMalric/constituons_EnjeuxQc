@@ -1,0 +1,69 @@
+<mat-vertical-stepper #verticalSteper [linear]="false" #stepperV>
+    <mat-step>
+        <ng-template matStepLabel>Nouvel Espace de travail</ng-template>
+        <p><br>
+          Créez le
+        </p>
+      <mat-vertical-stepper [linear]="true" #stepperH>
+        <mat-step [stepControl]="nomFormGroup">
+          <form [formGroup]="nomFormGroup">
+            <ng-template matStepLabel>Le nom</ng-template>
+            <mat-form-field class="formFieldWidth90pc center">
+              <input matInput placeholder="Nom" formControlName="nom" required>
+            </mat-form-field>
+            <div class="center">
+                <button mat-button matStepperNext>Next + Prochain</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="descFormGroup">
+          <form [formGroup]="descFormGroup">
+            <ng-template matStepLabel>La description</ng-template>
+            <mat-form-field class="formFieldWidth90pc center">
+                <textarea 
+                matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="3"
+                cdkAutosizeMaxRows="5" 
+                placeholder="Description" 
+                formControlName="description" required></textarea>
+            </mat-form-field>
+            <div class="center">
+              <button mat-button matStepperPrevious>Back - Retour</button>
+              <button mat-button matStepperNext (click)="stepperV.next()">Next + Prochain</button>
+            </div>
+            </form>
+        </mat-step>
+      </mat-vertical-stepper>
+    </mat-step>
+    <mat-step [stepControl]="authorisedUsersFormGroup">
+        <form [formGroup]="authorisedUsersFormGroup">
+          <ng-template matStepLabel>Les utilisateurs</ng-template>
+          <mat-form-field class="formFieldWidth90pc center">
+              <input type="text" placeholder="Choisissez un nom / Pick one name"  matInput [matAutocomplete]="auto" formControlName="authorisedUsers" required>
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of options" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+        </form>
+    </mat-step>
+    <hr>
+    <mat-step>
+      <ng-template matStepLabel>Validez l'espace de travail</ng-template>
+      <div>
+          <button mat-button matStepperPrevious>Back - Retour</button>
+          <button mat-button (click)="verticalSteper.reset()">Reset * Effacer</button>
+          <button mat-button (click)="onFormSubmitStep(nomFormGroup,descFormGroup,authorisedUsersFormGroup)">Valider l'espace de travail</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+  
+  <button 
+    mat-fab (click)="multiplePost()" 
+    class="custom-button app-fab--absolute md-fab-bottom-right2" 
+    color="warn" >
+    <span class="mdc-fab__icon material-icons "><mat-icon>add</mat-icon></span>
+  </button>

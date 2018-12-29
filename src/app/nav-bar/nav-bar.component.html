@@ -1,5 +1,5 @@
 
-<mat-menu #subMenu="matMenu">
+<mat-menu #subMenu1="matMenu">
     
   <button mat-menu-item routerLink="/test" (click)="snav.close()">Test</button>
   <button mat-menu-item routerLink="/personne-create" (click)="snav.close()">Création de personnes</button>
@@ -7,13 +7,20 @@
   <button mat-menu-item routerLink="/opinion-create" (click)="snav.close()">Création d'opinions</button>
   <hr>
   <button mat-menu-item routerLink="/enjeuxTab" (click)="snav.close()">Tableau d'enjeux</button>
+  <hr>
+  <button mat-menu-item [matMenuTriggerFor]="subMenu2">Liens direct<br>pour la création</button>
+</mat-menu>
+
+<mat-menu #subMenu2="matMenu">
+   
+    <button mat-menu-item routerLink="/espace-de-travail" (click)="snav.close()">Espaces de travail</button>
 </mat-menu>
 
 <mat-menu #menu="matMenu">
   <button mat-menu-item routerLink="/personnes" (click)="snav.close()">Liste de personnes</button>
   <button mat-menu-item routerLink="/enjeux" (click)="snav.close()">Liste d'enjeux</button>
   <button mat-menu-item routerLink="/opinions" (click)="snav.close()">Liste d'opinion</button>
-  <button mat-menu-item [matMenuTriggerFor]="subMenu">Liens direct<br>pour la création</button>
+  <button mat-menu-item [matMenuTriggerFor]="subMenu1">Liens direct<br>pour la création</button>
 </mat-menu>
 
 
@@ -57,9 +64,12 @@
         <hr>
         <button mat-menu-item *ngIf="!auth.isLoggedIn()" (click)="snav.toggle()" routerLink="/login">Sign in / Entrez</button>
         <button mat-menu-item *ngIf="auth.isLoggedIn()" (click)="snav.toggle()"routerLink="/profile">Info de {{ auth.getUserDetails()?.name }}</button>
+        <hr *ngIf="auth.isLoggedIn()">
         <button mat-menu-item *ngIf="auth.isLoggedIn()" (click)="snav.toggle();auth.logout()" >Logout / Quitter</button>
         <hr>
         <button mat-menu-item routerLink="/home" (click)="snav.toggle()">Accueil</button>
+        <hr>
+        <button mat-menu-item routerLink="/espace-de-travail/" (click)="snav.toggle()">Espaces de travail</button>
         <hr>
         <button mat-menu-item routerLink="/enjeux/" (click)="snav.toggle()">La démocratie</button>
         <button mat-menu-item routerLink="/enjeux/" (click)="snav.toggle()">Commission 2</button>

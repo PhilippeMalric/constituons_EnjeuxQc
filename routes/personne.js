@@ -12,7 +12,7 @@ var Opinion = require('../models/Opinion.js');
 
 /* GET ALL Personne */
 router.get('/', function(req, res, next) {
-  Personne.find().populate('opinion').exec((err, personne) => {
+  Personne.find().populate('opinions').exec((err, personne) => {
     console.log("Populated personne " + personne);
     res.json(personne)
   });
