@@ -1,16 +1,18 @@
 
 import {ChangeDetectorRef, Component, OnDestroy, ViewEncapsulation, Input} from '@angular/core';
 import { AuthenticationService } from '../service/authentication.service';
+import { environment } from "../../environments/environment"
 
 /** @title Responsive sidenav */
 @Component({
   selector: 'app-nav-bar',
   templateUrl: 'nav-bar.component.html',
-  styleUrls: ['nav-bar.component.css'],
+  styleUrls: ['nav-bar.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class NavBarComponent implements OnDestroy {
-
+  
+  devMode = !environment.production
   mode = 'push'
   opened = false;
 

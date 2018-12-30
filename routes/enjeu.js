@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Opinion = require('../models/Opinion.js');
+var EspaceDeTravail = require('../models/EspaceDeTravail');
 var Enjeu = require('../models/Enjeu.js');
 var Personne = require('../models/Personne.js');
 
@@ -113,6 +113,24 @@ router.post('/', function(req, res) {
   })
 
   e.save()
+  console.log("e : ",e,"edt :",req.body.edt)
+  EspaceDeTravail.findOneAndUpdate({ "_id" : req.body.edt },
+    {    $push: {
+            enjeux: e
+        }
+    },
+    {
+        new: true,
+        sort: {_id: -1},
+        upsert: true
+    },
+    function(err, doc) {
+        if(err){
+        console.log(err);
+        }else{
+          console.log("doc edts updated : ",doc)
+        }
+    })
   res.json(e);
 });
 

@@ -71,18 +71,43 @@ export class EspaceDeTravailCreateComponent implements OnInit {
   fromNameToID(name){
     for(let u of this.User){
       if(u.name == name){
-        return [u.id]
+        return u.id
       }
     }
   }
+  fromIdToName(idTab){
+    let returnTab = []
+    for (let id of idTab){
+      for(let u of this.User){
+        if(u.id == id){
+          returnTab.push(u.name)
+        }
+      }
+    }
+    return returnTab
+  }
 
-onFormSubmitStep = (form1:FormGroup,form2:FormGroup,form3:FormGroup) => {
-  let usersId = this.fromNameToID(form3.value.authorisedUsers)
+addCollab(form1:FormGroup){
+  let usersId = this.fromNameToID(form1.value.authorisedUsers)
   console.log("userId : ",usersId)
+  this.api.addcollab(this.id,{
+    'authorisedUser' : usersId
+  })
+  .subscribe(res => {
+    console.log("AddUser : ",res)
+    this.authorisedUsers = this.fromIdToName(res.authorisedUsers)
+    }, (err) => {
+      console.log(err);
+    });
+  
+}
+
+onFormSubmitStep = (form1:FormGroup,form2:FormGroup) => {
+  
   this.api.updateEspaceDeTravail(this.id,{
     'nom' :form1.value.nom,
-    'description' :form2.value.description,
-    'authorisedUsers' : usersId
+    'description' :form2.value.description
+    
   })
     .subscribe(res => {
       this.router.navigate(['/espace-de-travail-details', this.id]);

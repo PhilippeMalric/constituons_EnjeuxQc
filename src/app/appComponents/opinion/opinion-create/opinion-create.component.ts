@@ -66,6 +66,7 @@ export class OpinionCreateComponent implements OnInit {
       personneId:this.getPersonneId(authorFormGroup.value.author)
     })
     .subscribe(res => {
+      console.log("postOpinion : ",res)
         let id = res['_id'];
         this.opinionEvent.emit(id)
       }, (err) => {

@@ -20,6 +20,10 @@ var userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'personne'
   },
+  edts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'EspaceDeTravail'
+  }],
   hash: String,
   salt: String
 });
@@ -42,8 +46,10 @@ userSchema.methods.generateJwt = function() {
     _id: this._id,
     email: this.email,
     name: this.name,
+    associatedPersonne: this.associatedPersonne,
     exp: parseInt(expiry.getTime() / 1000),
   }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
 
-mongoose.model('User', userSchema);
+
+module.exports = mongoose.model('User', userSchema);

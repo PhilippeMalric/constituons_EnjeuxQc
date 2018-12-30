@@ -8,11 +8,12 @@ const httpOptions = {
 };
 const apiUrlEspaceDeTravail = "/api/espaceDeTravail";
 const apiUrlUsers = "/api/users";
+const apiUrlUser = "/api/user";
 const apiUrlPersonne = "/api/personne";
 const apiUrlEnjeu = "/api/enjeu";
 const apiUrlOpinion = "/api/opinion";
 const apiUrlOpinionByEnjeux = "/api/opinion/byEnjeu";
-
+const apiUrlPostFile = "/api/postFile";
 
 
 @Injectable({
@@ -46,6 +47,14 @@ export class ApiService {
     return body || { };
   }
 
+//-----------------------------------------------upload File
+
+uploadFile(data): Observable<any> {
+  return this.http.post(apiUrlPostFile, data, httpOptions)
+    .pipe(
+      catchError(this.handleError)
+    );
+}
 
 //-----------------------------------------------Likes Dontlikes
 addLikeToEnjeux(id): Observable<any> {
@@ -175,6 +184,15 @@ getUsers(): Observable<any> {
     catchError(this.handleError));
 }
 
+getUser(id): Observable<any> {
+
+  console.log("apiUrlUsers : "+apiUrlUser)
+
+  return this.http.get(apiUrlUser+"/"+id, httpOptions).pipe(
+    map(this.extractData),
+    catchError(this.handleError));
+}
+
 //------------------------------------------EspacesDeTravail
 
 cleanEspacesDeTravail(): Observable<any> {
@@ -216,6 +234,23 @@ updateEspaceDeTravail(id: string, data): Observable<any> {
       catchError(this.handleError)
     );
 }
+
+addcollab(id: string, data): Observable<any> {
+  const url = `${apiUrlEspaceDeTravail}/addUser/${id}`;
+  return this.http.put(url, data, httpOptions)
+    .pipe(
+      catchError(this.handleError)
+    );
+}
+
+addEnjeu(id: string, data): Observable<any> {
+  const url = `${apiUrlEspaceDeTravail}/addEnjeu/${id}`;
+  return this.http.put(url, data, httpOptions)
+    .pipe(
+      catchError(this.handleError)
+    );
+}
+
 
 deleteEspaceDeTravail(id: string): Observable<{}> {
   const url = `${apiUrlEspaceDeTravail}/${id}`;

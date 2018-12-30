@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../../api.service';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material';
+import { DataService } from 'src/app/sharedServices';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class EnjeuCreateComponent implements OnInit {
 
   opTogle:Boolean = false
 
-  constructor(private router: Router, private api: ApiService, private formBuilder: FormBuilder) {
+  constructor(private router: Router, private api: ApiService, private formBuilder: FormBuilder, public dataService: DataService) {
 
     console.log("construct create enjeu")
 
@@ -42,7 +43,8 @@ export class EnjeuCreateComponent implements OnInit {
       'titre' :"",
       'description' :"",
       'categorie' :[],
-      'badges' : this.createBadges2()
+      'badges' : this.createBadges2(),
+      'edt':this.dataService.edT
     })
       .subscribe(res => {
         console.log("enjeu res : ",+res);

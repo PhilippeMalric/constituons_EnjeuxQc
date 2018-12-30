@@ -34,6 +34,14 @@
       width: fit-content;
 }
 
+.left{
+    text-align: center; 
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: fit-content;
+}
+
 .action{
     text-align: center;
     min-height: 80px;
@@ -99,4 +107,8 @@
 .slider{
     float: right;
     padding: 10px;
+}
+
+.width_300{
+    width: 300px;
 }

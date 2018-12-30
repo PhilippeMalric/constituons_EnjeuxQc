@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var EspaceDeTravail = require('../models/EspaceDeTravail');
-var Personne = require('../models/Personne.js');
+var User = require('../models/users');
 var Opinion = require('../models/Opinion.js');
 
 /*.populate('opinion').exec((err, opinion) => {
@@ -66,15 +66,77 @@ e.save()
 res.json(e);
 });
 
+/* Add User EspaceDeTravail */
+router.put('/addUser/:id', function(req, res, next) {
+    console.log("addUser req.body :",req.body)
+
+    EspaceDeTravail.findOneAndUpdate({ "_id" : req.params.id },
+        {    $push: {
+            authorisedUsers: req.body.authorisedUser
+            }
+        },
+        {
+            new: true,
+            sort: {_id: -1},
+            upsert: true
+        },
+        function(err, doc) {
+            if(err){
+            console.log(err);
+            }else{
+            res.json(doc)
+            }
+        })
+
+    User.findOneAndUpdate({ "_id" : req.body.authorisedUser },
+        {    $push: {
+                edts: req.params.id
+            }
+        },
+        {
+            new: true,
+            sort: {_id: -1},
+            upsert: true
+        },
+        function(err, doc) {
+            if(err){
+            console.log(err);
+            }else{
+            console.log("doc user updated : ",doc)
+            }
+        })
+});
+
+/* Add Enjeu EspaceDeTravail */
+router.put('/addEnjeu/:id', function(req, res, next) {
+    console.log("addEnjeu req.body :",req.body)
+    
+    EspaceDeTravail.findByIdAndUpdate(req.params.id,
+        {    $push: {
+            enjeux: req.body.newEnjeu
+            }
+        },
+        {safe: true, upsert: true},
+        function(err, doc) {
+            if(err){
+            console.log(err);
+            }else{
+              res.json(doc)
+            }
+        })
+      
+    });
+
+
 /* UPDATE EspaceDeTravail */
 router.put('/:id', function(req, res, next) {
-console.log("req.body put",req.body)
-
-EspaceDeTravail.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
-});
-});
+    console.log("req.body put",req.body)
+    
+    EspaceDeTravail.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+        if (err) return next(err);
+        res.json(post);
+    });
+    });
 
 
 /* DELETE EspaceDeTravail */

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { AuthenticationService, TokenPayload } from '../../service/authentication.service';
 import { Router } from '@angular/router';
 
@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+
+  @Output() logged = new EventEmitter();
+
   credentials: TokenPayload = {
     email: '',
     name: '',

@@ -42,6 +42,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTreeModule } from '@angular/material/tree';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
 
 // ----------------------prime ng
 
@@ -263,6 +264,7 @@ const ROUTES: Routes = [
     EspaceDeTravailEditComponent
   ],
   imports: [
+    MatRadioModule,
     ScrollDispatchModule,
     FlexLayoutModule,
     BrowserModule,

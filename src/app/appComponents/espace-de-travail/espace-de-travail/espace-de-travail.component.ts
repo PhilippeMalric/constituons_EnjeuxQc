@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { DataService } from 'src/app/sharedServices';
+import { AuthenticationService } from 'src/app/service/authentication.service';
 
 @Component({
   selector: 'app-espace-de-travail',
@@ -9,16 +10,15 @@ import { DataService } from 'src/app/sharedServices';
   styleUrls: ['./espace-de-travail.component.css']
 })
 export class EspaceDeTravailComponent implements OnInit {
-  espaces : any[]
-  constructor(private router: Router, private route: ActivatedRoute,private api: ApiService, public dataService: DataService) { }
+  user:any;
+  edts:any[];
+  constructor(private auth: AuthenticationService, private router: Router, private route: ActivatedRoute,private api: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
     console.log("init  EspaceDeTravail")
-  
-    this.api.getEspacesDeTravail()
-    .subscribe(res => {
-      console.log("espaces : ",res)
-      this.espaces = res
+    this.api.getUser(this.auth.getUserDetails()._id).subscribe((data:any) => {
+      this.user = data;
+      this.edts = data.edts;
     })
   }
 

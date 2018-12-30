@@ -100,20 +100,44 @@ router.post('/byEnjeu', function(req, res, next) {
 
 var addOpinionToEnjeu = function(id,opinionId){
 
-  Enjeu.findById(id,function(err, enjeu){
-    console.log("enjeu",enjeu)
-    enjeu.opinions.push(opinionId)
-
-  })
+  Enjeu.findOneAndUpdate({ "_id" : id },
+    {    $push: {
+          opinions: opinionId
+        }
+    },
+    {
+        new: true,
+        sort: {_id: -1},
+        upsert: true
+    },
+    function(err, doc) {
+        if(err){
+        console.log(err);
+        }else{
+          console.log("Enjeu opinions updated : ",doc)
+        }
+    })
 
 }
 
 var addOpinionToPersonne = function(id,opinionId){
 
-  Personne.findById(id,function(err, personne){
-
-    personne.opinions.push(opinionId)
-
+  Personne.findOneAndUpdate({ "_id" : id },
+  {    $push: {
+        opinions: opinionId
+      }
+  },
+  {
+      new: true,
+      sort: {_id: -1},
+      upsert: true
+  },
+  function(err, doc) {
+      if(err){
+      console.log(err);
+      }else{
+        console.log("Personne opinions updated : ",doc)
+      }
   })
 
 }
@@ -126,7 +150,6 @@ var d = req.body
 enjeuxTab = []
 if(d.enjeux && d.enjeux.length() > 0){
   for (let e of d.enjeux) {
-
     enjeu = new Enjeu({
       like: 0,
       dontLike: 0,
@@ -145,7 +168,7 @@ if(d.enjeux && d.enjeux.length() > 0){
 else{
   enjeuxTab.push(d.enjeuId);
 }
-
+var o1 = null
 if(!d.personneId){
   p1 = new Personne({
     nom : "test",
@@ -154,7 +177,7 @@ if(!d.personneId){
     photo : ""
   })
   p1.save();
-  var o1 = new Opinion({
+  o1 = new Opinion({
     enjeu: d.enjeu,
     title: d.title,
     description: d.description,
@@ -164,8 +187,7 @@ if(!d.personneId){
   });
 }
 else{
-
-  var o1 = new Opinion({
+  o1 = new Opinion({
     enjeu: d.enjeu,
     title: d.title,
     description: d.description,

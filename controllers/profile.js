@@ -26,3 +26,14 @@ module.exports.getUsers = function(req, res) {
       });
 
 };
+
+module.exports.getUser = function(req, res) {
+
+  User
+    .findById(req.params.id).populate("edts")
+    .exec(function(err, user) {
+      console.log("user : ",user)
+      res.status(200).json(user);
+    });
+
+};

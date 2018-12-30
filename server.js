@@ -65,6 +65,7 @@ var personneApiRouter = require('./routes/personne');
 var enjeuApiRouter = require('./routes/enjeu');
 var opinionApiRouter = require('./routes/opinion');
 var espaceDeTravail = require('./routes/espace-de-travail');
+var postFile = require('./routes/postFile');
 
 var cors = require('cors')
 
@@ -116,6 +117,7 @@ app.use('/api/personne', personneApiRouter);
 app.use('/api/enjeu', enjeuApiRouter);
 app.use('/api/opinion', opinionApiRouter);
 app.use('/api/espaceDeTravail', espaceDeTravail);
+app.use('/api/postFile', postFile);
 
 
 

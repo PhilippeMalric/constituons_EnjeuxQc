@@ -12,18 +12,18 @@
       <mat-step [stepControl]="titreFormGroup">
         <form [formGroup]="titreFormGroup">
           <ng-template matStepLabel>Le titre</ng-template>
-          <mat-form-field class="formFieldWidth90pc center">
+          <mat-form-field class="formFieldWidth90pc left width_300">
             <input matInput placeholder="Titre" formControlName="titre" required>
           </mat-form-field>
-          <div class="center">
-              <button mat-button matStepperNext>Next + Prochain</button>
+          <div class="left">
+              <button mat-button matStepperNext color="primary">Next + Prochain</button>
           </div>
         </form>
       </mat-step>
       <mat-step [stepControl]="descFormGroup">
         <form [formGroup]="descFormGroup">
           <ng-template matStepLabel>La description</ng-template>
-          <mat-form-field class="formFieldWidth90pc center">
+          <mat-form-field class="formFieldWidth90pc center left width_300">
               <textarea 
               matInput
               cdkTextareaAutosize
@@ -33,9 +33,9 @@
               placeholder="Description" 
               formControlName="description" required></textarea>
           </mat-form-field>
-          <div class="center">
-            <button mat-button matStepperPrevious>Back - Retour</button>
-            <button mat-button matStepperNext>Next + Prochain</button>
+          <div class="left">
+            <button mat-button matStepperPrevious color="accent">Back - Retour</button>
+            <button mat-button matStepperNext color="primary">Next + Prochain</button>
           </div>
           </form>
       </mat-step>
@@ -62,9 +62,9 @@
     <mat-step>
       <ng-template matStepLabel>Validez l'enjeu</ng-template>
       <div>
-          <button mat-button matStepperPrevious>Back - Retour</button>
-          <button mat-button (click)="verticalSteper.reset()">Reset * Effacer</button>
-          <button mat-button (click)="onFormSubmitStep(titreFormGroup,descFormGroup,categorieFormGroup)">Valider l'enjeu</button>
+          <button mat-button color="accent" matStepperPrevious>Back - Retour</button>
+          <button mat-button color="warn" (click)="verticalSteper.reset()">Reset * Effacer</button>
+          <button mat-button color="primary" (click)="onFormSubmitStep(titreFormGroup,descFormGroup,categorieFormGroup)">Valider l'enjeu</button>
       </div>
     </mat-step>
 </mat-vertical-stepper>
