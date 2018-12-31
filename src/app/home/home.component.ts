@@ -21,6 +21,13 @@ export class HomeComponent implements OnInit {
   myFile:File; /* property of File type */
   constructor(private sanitizer: DomSanitizer, private api: ApiService, private auth: AuthenticationService, public dataService: DataService) { }
 
+
+  ngOnInit() {
+    if(this.auth.isLoggedIn()){
+      this.getUserEdts()
+    }
+  }
+
 getUserEdts(){
   this.api.getUser(this.auth.getUserDetails()._id)
     .subscribe(res => {
@@ -33,12 +40,6 @@ getUserEdts(){
       });
 }
 
-  ngOnInit() {
-    if(this.auth.isLoggedIn()){
-      this.getUserEdts()
-    }
-
-  }
 
   onLogin(event){
     console.log("User details : ",this.auth.getUserDetails())

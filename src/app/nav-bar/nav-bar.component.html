@@ -91,6 +91,7 @@
   
     <footer >
         <mat-toolbar color="accent">
+            <button *ngIf="auth.isLoggedIn()" class="left" mat-raised-button (click)="openBottomSheet()">Choix de l'espace de travail</button>
             <p class="center" *ngIf="devMode"> Dev Mode </p> 
         </mat-toolbar>
     </footer>

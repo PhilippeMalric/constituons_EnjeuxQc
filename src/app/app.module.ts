@@ -3,6 +3,8 @@ import { NgModule, Input } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import {BottomSheetOverviewExampleSheet} from './nav-bar/nav-bar.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -43,6 +45,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTreeModule } from '@angular/material/tree';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 // ----------------------prime ng
 
@@ -216,7 +219,11 @@ const ROUTES: Routes = [
 ];
 
 @NgModule({
+  entryComponents: [
+    BottomSheetOverviewExampleSheet
+  ],
   declarations: [
+    BottomSheetOverviewExampleSheet,
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
@@ -264,6 +271,7 @@ const ROUTES: Routes = [
     EspaceDeTravailEditComponent
   ],
   imports: [
+    MatBottomSheetModule,
     MatRadioModule,
     ScrollDispatchModule,
     FlexLayoutModule,
