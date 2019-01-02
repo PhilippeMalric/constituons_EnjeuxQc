@@ -3,8 +3,8 @@
   <div class="container">
     <h1>Plateforme EnjeuxQc</h1> 
     <img id="logoHome" src="assets/logo/newLogo.png"/>
-    <div class="center" *ngIf="!auth.isLoggedIn()">
-      <p>Bienvenue sur la plateforme Enjeux Québec.</p>
+    <div class="left" *ngIf="!auth.isLoggedIn()">
+      <h2>Bienvenue sur la plateforme Enjeux Québec.</h2>
       <hr>
       <mat-checkbox  [(ngModel)]="checked">Cochez si vous voulez vous identifier</mat-checkbox>
       <div *ngIf="checked">
@@ -18,8 +18,8 @@
         </mat-tab-group>
       </div>
     </div>
-    <div *ngIf="auth.isLoggedIn()">
-        <p>Bienvenue {{auth.getUserDetails()?.name}} sur la plateforme Enjeux Québec.</p>
+    <div class="left" *ngIf="auth.isLoggedIn()">
+        <h2>Bienvenue {{auth.getUserDetails()?.name}} sur la plateforme Enjeux Québec.</h2>
     </div>
     <br>
     <h2>Introduction</h2>
@@ -48,22 +48,22 @@
     
     <h2>Schéma sous-jaçent le site web</h2>
     <p>Trois principaux éléments vont vous permettre d'explorer les enjeux,<br>leurs opinions et les personnes qui les ont émisent</p>
-    <p>Ils sont listé dans le shéma suivant :</p>
+    <p>Ils sont listés dans le shéma suivant :</p>
     <ul>
       <li>
         <p>Un enjeu à : </p>
         <ul>
           <li>
-            <p>Des opinions qui sont relié à des</p>
+            <p>Des opinions qui sont reliés à des</p>
           </li>
           <li>
-            <p>Des personnes. Chaque Personnes à </p>
+            <p>Des personnes. Chaque Personnes a :</p>
             <ul>
               <li>
                   <p>Une liste d'opinions et</p>
               </li>
               <li>
-                  <p>Une liste d'enjeu qu'il a créé ou pour lesquels il a manifesté son point de vue (ajouté une opinion, aimé ou pas) </p>
+                  <p>Une liste d'enjeux qu'il a créé ou pour lesquels il a manifesté son point de vue (soit il a ajouté une opinion, soit il a aimé ou pas) </p>
               </li>
             </ul>
           </li>
@@ -74,23 +74,6 @@
 
     <h3>Pour commencer identifiez-vous (en haut, en cochant la case) et choisissez un espace de travail (ci-bas) ou explorez les enjeux publiques</h3>
 
-    <mat-radio-group *ngIf="auth.isLoggedIn()" class="example-radio-group" (change)="radioChange($event)">
-        <mat-radio-button class="example-radio-button" *ngFor="let espace of espacesName" [value]="espace">
-          {{espace}}
-        </mat-radio-button>
-    </mat-radio-group>
-    <div class="example-selected-value">Votre espace de travail est: {{dataService.edT_nom}}</div>
-    <button  mat-fab (click)="clickB()"  color="accent">
-     
-    </button>
-    <button  mat-fab   color="warn">
-        <a [href]="downloadJsonHref" download="download.json"><mat-icon>?</mat-icon></a> 
-    </button>
-    <form #yourForm="ngForm" (ngSubmit)="onSubmit()">
-        <input type="text" [(ngModel)]="Name" name="Name"/>
-        <input type="file" #fileupload  name="myFile" (change)="fileChange(fileupload)"/>
-        <button type="submit">Submit</button>
-    </form>
     <div>
       <button class="md-fab-bottom-right2" mat-fab [routerLink]="['/enjeux']" routerLinkActive="router-link-active" color="accent">
         <mat-icon>art_track</mat-icon>

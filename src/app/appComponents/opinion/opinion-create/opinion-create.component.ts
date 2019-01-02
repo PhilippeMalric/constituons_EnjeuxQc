@@ -22,10 +22,12 @@ export class OpinionCreateComponent implements OnInit {
   titreFormGroup: FormGroup;
   descriptionFormGroup: FormGroup;
   authorFormGroup: FormGroup;
+  sourceFormGroup: FormGroup;
 
   title:string='';
   description:string='';
   author:string='';
+  source:string="";
 
   @Output() opinionEvent = new EventEmitter<string>();
 
@@ -47,15 +49,20 @@ export class OpinionCreateComponent implements OnInit {
     this.authorFormGroup = this.formBuilder.group({
       'author' : [null, Validators.required]
     });
+    this.sourceFormGroup = this.formBuilder.group({
+      'source' : [null, Validators.required]
+    });
+    
   }
 
 
-  onFormSubmitStep = (titreFormGroup,descriptionFormGroup,authorFormGroup) => {
+  onFormSubmitStep = (titreFormGroup,descriptionFormGroup,authorFormGroup,sourceFormGroup) => {
 
     this.api.postOpinion({
       'enjeuId' :this.enjeuId,
       'title' :titreFormGroup.value.title,
       'description' : descriptionFormGroup.value.description,
+      'source':sourceFormGroup.value.source,
       'author' : authorFormGroup.value.author,
       'personne':{
         nom:"nom",

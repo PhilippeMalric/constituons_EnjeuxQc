@@ -1,6 +1,7 @@
 var passport = require('passport');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var EspaceDeTravail = require('../models/EspaceDeTravail');
 
 var sendJSONresponse = function(res, status, content) {
   res.status(status);
@@ -16,15 +17,34 @@ module.exports.register = function(req, res) {
   //   return;
   // }
 
+
+EspaceDeTravail.find({nom:"Publique"}).exec((err2,edt)=>{
+
   var user = new User();
 
   user.name = req.body.name;
   user.email = req.body.email;
-  user.edts = [];
+  
   user.personneCreated = [];
   user.associatedPersonne = null;
   user.setPassword(req.body.password);
-
+  var edt = null
+  if (edt){
+    edt = edt._id
+  }
+  else{
+    edt = new EspaceDeTravail({
+      nom:"publique",
+      authorisedUsers:[user],
+      proprietaire: user,
+      description:"Espace publique",
+      enjeux: []
+    })
+    edt.save()
+    
+  }
+  console.log("edt : ",edt)
+  user.edts = [edt];
   user.save(function(err) {
     var token;
     token = user.generateJwt();
@@ -33,6 +53,10 @@ module.exports.register = function(req, res) {
       "token" : token
     });
   });
+  
+})
+
+  
 
 };
 

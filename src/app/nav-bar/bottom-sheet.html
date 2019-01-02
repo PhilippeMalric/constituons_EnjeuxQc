@@ -1,21 +1,30 @@
 <mat-nav-list>
   <div *ngIf="auth.isLoggedIn()">
-    <mat-radio-group  class="example-radio-group" (change)="radioChange($event)">
-        <mat-radio-button class="example-radio-button" *ngFor="let espace of espacesName" [value]="espace">
-          {{espace}}
+    <h4>Vous êtes authentifié sous le nom de : {{auth.getUserDetails()?.name}}</h4>
+    <hr>
+    <h3>Choisissez un espace de travail :</h3>
+    <mat-radio-group  class="example-radio-group" (change)="radioChange($event)" #radioGroup>
+        <mat-radio-button class="example-radio-button" *ngFor="let espace of espacesName" [value]="espace" [checked]="espace.checked">
+          {{espace.nom}}
         </mat-radio-button>
     </mat-radio-group>
-    <div class="example-selected-value">Votre espace de travail est: {{dataService.edT_nom}}</div>
-    <button  mat-fab (click)="clickB()"  color="accent">
+    <div class="center">
+      <button  mat-raised-button  color="warn">
+          <a [href]="downloadJsonHref" download="download.json">Télécharger <mat-icon>cloud_download</mat-icon></a> 
+      </button>
      
-    </button>
-    <button  mat-fab   color="warn">
-        <a [href]="downloadJsonHref" download="download.json"><mat-icon>?</mat-icon></a> 
-    </button>
-    <form #yourForm="ngForm" (ngSubmit)="onSubmit()">
-        <input type="text" [(ngModel)]="Name" name="Name"/>
-        <input type="file" #fileupload  name="myFile" (change)="fileChange(fileupload)"/>
-        <button type="submit">Submit</button>
-    </form>
+    </div>
+    <hr>
+    <input class="center width_300 marginB" type="text" placeholder="Inscrivez le nom du nouvel espace de travail"  matInput [(ngModel)]="edt_name" required>     
+    <div class="center">
+      <button mat-raised-button type="button" color="primary">
+          <label for="fileToUpload">Choisissez un fichier <mat-icon>cloud_upload</mat-icon></label>
+      </button>
+      <input id="fileToUpload" type="file" style="display:none;" #fileupload  name="myFile" (change)="fileChange(fileupload)">
+    </div>
+  </div>
+  <div class="center" *ngIf="!auth.isLoggedIn()">
+    <h3>Votre espace de travail est : Publique</h3>
+    <p>Veuillez vous identifier pour avoir accès à un espace de travil privé.</p>
   </div>
 </mat-nav-list>

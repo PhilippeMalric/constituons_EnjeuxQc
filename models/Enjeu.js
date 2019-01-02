@@ -19,6 +19,10 @@ var EnjeuSchema = new mongoose.Schema({
     description: String,
     categories: [String],
     badges: String,
+    edt:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'EspaceDeTravail'
+    },
     opinions:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'opinion'

@@ -109,7 +109,8 @@ router.post('/', function(req, res) {
     description : d.description,
     categories : d.categories,
     badges : d.badges,
-    opinions : []
+    opinions : [],
+    edt:d.edt
   })
 
   e.save()

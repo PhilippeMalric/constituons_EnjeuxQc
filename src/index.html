@@ -9,7 +9,17 @@
  -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="icon" type="image/x-icon" href="assets/logo/favicon2.png">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js"></script>
+  <script type="text/javascript">
+    $(document).on("scroll",function(){
+        if($(document).scrollTop()>100){
+            $("header").removeClass("large").addClass("small");
+        } else{
+            $("header").removeClass("small").addClass("large");
+        }
+    });
+    </script>
 </head>
 <body>
   <app-root></app-root>

@@ -40,12 +40,25 @@
       </div>
     </form>
   </mat-step>
+  <mat-step [stepControl]="sourceFormGroup">
+      <form [formGroup]="sourceFormGroup" class="auto-complete-form">
+        <ng-template matStepLabel>Inscrivez votre source</ng-template>
+          <mat-form-field class="formFieldWidth90pc left ">
+            <input type="text" placeholder="(URL valide)" formControlName="source" aria-label="Number" matInput [matAutocomplete]="auto">
+            
+          </mat-form-field>
+        <div class="left">
+          <button mat-button color="accent" matStepperPrevious>Back - Retour</button>
+          <button mat-button color="primary" matStepperNext>Next + Prochain</button>
+        </div>
+      </form>
+    </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done = Fin</ng-template>
     <div class="left">
       <button mat-button color="accent" matStepperPrevious>Back - Retour</button>
       <button mat-button color="warn" (click)="stepper.reset()">Reset l'opinion</button>
-      <button mat-button color="primary" (click)="onFormSubmitStep(titreFormGroup,descriptionFormGroup,authorFormGroup)">Envoyez l'opinion / Submit</button>
+      <button mat-button color="primary" (click)="onFormSubmitStep(titreFormGroup,descriptionFormGroup,authorFormGroup,sourceFormGroup)">Envoyez l'opinion / Submit</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>

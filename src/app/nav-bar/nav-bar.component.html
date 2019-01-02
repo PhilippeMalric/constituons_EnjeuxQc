@@ -28,25 +28,25 @@
           color="primary" aria-label="sideBar" [matMenuTriggerFor]="menu">
     <span class="mdc-fab__icon material-icons ">favorite</span>
  </button>
-
-<mat-toolbar color="primary">
-  <button class="marginH10" mat-mini-fab (click)="snav.toggle()" color="warn">
-      <mat-icon>menu</mat-icon>
-  </button>
-  <div class="center">
-    <span class="fill-remaining-space">
-      <button  mat-mini-fab [routerLink]="['/personnes']" routerLinkActive="router-link-active" color="accent" [disabled]="!auth.isLoggedIn()" (click)="snav.close()">
-        <mat-icon>recent_actors</mat-icon>
-      </button>
-      <button class="marginH10" routerLink="/home" mat-raised-button color="primary" (click)="snav.close()">Enjeux Qc</button>
-      <button mat-mini-fab [routerLink]="['/enjeux']" routerLinkActive="router-link-active" color="accent" (click)="snav.close()">
-        <mat-icon>art_track</mat-icon>
-      </button>
-    </span>
-  </div>
-  <button class="marginH10" mat-raised-button color="accent" [routerLink]="['/about']" (click)="snav.close()">À propos</button>
-</mat-toolbar>
-
+<header>
+  <mat-toolbar class="app-toolbar " color="primary">
+    <button class="marginH10" mat-mini-fab (click)="snav.toggle()" color="warn">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <div class="center">
+      <span class="fill-remaining-space">
+        <button  mat-mini-fab [routerLink]="['/personnes']" routerLinkActive="router-link-active" color="accent" [disabled]="!auth.isLoggedIn()" (click)="snav.close()">
+          <mat-icon>recent_actors</mat-icon>
+        </button>
+        <button class="marginH10" routerLink="/home" mat-raised-button color="primary" (click)="snav.close()">Enjeux Qc</button>
+        <button mat-mini-fab [routerLink]="['/enjeux']" routerLinkActive="router-link-active" color="accent" (click)="snav.close()">
+          <mat-icon>art_track</mat-icon>
+        </button>
+      </span>
+    </div>
+    <button class="marginH10" mat-raised-button color="accent" [routerLink]="['/about']" (click)="snav.close()">À propos</button>
+  </mat-toolbar>
+</header>
 <!-- 
     <mat-drawer #drawer class="example-sidenav" mode="side">
     <div>
@@ -55,7 +55,6 @@
   </mat-drawer>
 
 -->
-
 <mat-sidenav-container class="all-wrap" >
 
   <mat-sidenav #snav [mode]="mode" [opened]="opened" role="navigation">
@@ -82,7 +81,7 @@
         
       </mat-nav-list>
     </mat-sidenav>
-  <mat-sidenav-content class="page-wrap">
+  <mat-sidenav-content class="page-wrap overflow-v" style="overflow: visible;">
     <hr>
     
     <main class="content">
@@ -91,15 +90,15 @@
   
     <footer >
         <mat-toolbar color="accent">
-            <button *ngIf="auth.isLoggedIn()" class="left" mat-raised-button (click)="openBottomSheet()">Choix de l'espace de travail</button>
-            <p class="center" *ngIf="devMode"> Dev Mode </p> 
+          <div class="center" style="display:inline">
+            <button *ngIf="auth.isLoggedIn()"  mat-raised-button (click)="openBottomSheet()">Choix de l'espace de travail</button>
+          </div>
         </mat-toolbar>
     </footer>
     
   </mat-sidenav-content>
   
 </mat-sidenav-container>
-
-
+<p  *ngIf="devMode"> Dev Mode </p> 
 
 

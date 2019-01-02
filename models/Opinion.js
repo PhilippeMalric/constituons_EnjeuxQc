@@ -28,7 +28,8 @@ var OpinionSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'enjeu'
   }],
-  description: String
+  description: String,
+  source: String
 });
 
 module.exports = mongoose.model('opinion', OpinionSchema);

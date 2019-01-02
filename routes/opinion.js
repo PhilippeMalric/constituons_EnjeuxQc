@@ -181,6 +181,7 @@ if(!d.personneId){
     enjeu: d.enjeu,
     title: d.title,
     description: d.description,
+    source : d.source,
     author: d.author,
     authorModel: p1,
     enjeux : enjeuxTab
@@ -191,6 +192,7 @@ else{
     enjeu: d.enjeu,
     title: d.title,
     description: d.description,
+    source : d.source,
     author: d.author,
     authorModel: d.personneId,
     enjeux : enjeuxTab,

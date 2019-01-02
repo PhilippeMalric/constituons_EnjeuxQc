@@ -49,8 +49,8 @@ export class ApiService {
 
 //-----------------------------------------------upload File
 
-uploadFile(data): Observable<any> {
-  return this.http.post(apiUrlPostFile, data, httpOptions)
+uploadFile(name,data): Observable<any> {
+  return this.http.post(apiUrlPostFile+"/"+encodeURI(name), data, httpOptions)
     .pipe(
       catchError(this.handleError)
     );

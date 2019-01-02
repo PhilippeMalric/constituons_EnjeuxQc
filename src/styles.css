@@ -4,7 +4,6 @@
 #logoHome{
     margin-bottom: 30px;
     float: right;
-    height: -webkit-fill-available;
     width: auto;
 }
 
@@ -35,7 +34,7 @@
 }
 
 .left{
-    text-align: center; 
+    text-align: left; 
     margin-left: 20px;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -111,4 +110,15 @@
 
 .width_300{
     width: 300px;
+    
 }
+
+.app-toolbar {
+    position: sticky;
+    position: -webkit-sticky; /* For macOS/iOS Safari */
+    top: 0; /* Sets the sticky toolbar to be on top */
+    z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+
+  

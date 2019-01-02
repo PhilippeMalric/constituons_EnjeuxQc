@@ -15,18 +15,23 @@ router.get('/clean', function(req, res, next) {
     EspaceDeTravail.find().populate("authorisedUsers").populate("proprietaire").populate({path : 'enjeux', populate : {path : 'opinions', populate :{path : 'authorModel'}}}).lean()
     .exec((err, espaceDeTravail) => {
     console.log("Populated espaceDeTravail " + espaceDeTravail);
-    for (espace of espaceDeTravail){
+    console.log("Longueur espaceDeTravail " + espaceDeTravail.length);
+    for (var espace of espaceDeTravail){
         console.log("espace : ",espace)
-        if(! "nom" in espace || espace.nom == "" || ! "description" in espace || espace.description == "" ||
-            ! "authorisedUsers" in espace || espace.authorisedUsers.length <= 0){
-            EspaceDeTravail.findByIdAndRemove(espace._id,{},function (err, post) {
-                if (err) return next(err);
-                console.log("espace deleted : ",espace)
+        console.log("authorisedUsers in espace :","authorisedUsers" in espace)
+        if(! ("nom" in espace) || espace.nom == "" || ! ("description" in espace) || espace.description == "" || ! ("authorisedUsers" in espace) ){
+            console.log("Delete espace._id",espace._id)
+            EspaceDeTravail.findByIdAndRemove(espace._id, {},function (err, post) {
+                if (err) return console.log(err);
+                console.log("espace deleted : ",post)
             })
         }
     }
-    res.json({clean:true})
-  });
+    EspaceDeTravail.find().populate("authorisedUsers").populate("proprietaire").populate({path : 'enjeux', populate : {path : 'opinions', populate :{path : 'authorModel'}}}).lean()
+        .exec((err, espaceDeTravail2) => {
+        res.json(espaceDeTravail2)
+    })
+});
   
 });
 

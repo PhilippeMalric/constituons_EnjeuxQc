@@ -26,6 +26,10 @@ export class EspaceDeTravailComponent implements OnInit {
     this.api.cleanEspacesDeTravail()
       .subscribe(res => {
       console.log("res : ",res)
+      this.api.getUser(this.auth.getUserDetails()._id).subscribe((data:any) => {
+        this.user = data;
+        this.edts = data.edts;
+      })
     })
   }
 
