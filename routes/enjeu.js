@@ -113,8 +113,17 @@ router.post('/', function(req, res) {
     edt:d.edt
   })
 
-  e.save()
-  console.log("e : ",e,"edt :",req.body.edt)
+  e.save((err, data) => {
+    if (err) {
+       console.log(err);
+    }
+    res.json(data);
+    console.log(data);
+  })
+  console.log("e : ",e)
+  console.log("edt :",req.body.edt)
+  
+
   EspaceDeTravail.findOneAndUpdate({ "_id" : req.body.edt },
     {    $push: {
             enjeux: e
@@ -127,12 +136,12 @@ router.post('/', function(req, res) {
     },
     function(err, doc) {
         if(err){
-        console.log(err);
+          console.log(err);
         }else{
           console.log("doc edts updated : ",doc)
         }
     })
-  res.json(e);
+  
 });
 
 /* ADD opinion */

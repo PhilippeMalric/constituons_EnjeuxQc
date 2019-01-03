@@ -18,7 +18,9 @@ module.exports.register = function(req, res) {
   // }
 
 
-EspaceDeTravail.find({nom:"Publique"}).exec((err2,edt)=>{
+EspaceDeTravail.findOne({nom:"Publique"}).exec((err2,edt)=>{
+
+  console.log("edt : ",edt)
 
   var user = new User();
 
@@ -28,36 +30,32 @@ EspaceDeTravail.find({nom:"Publique"}).exec((err2,edt)=>{
   user.personneCreated = [];
   user.associatedPersonne = null;
   user.setPassword(req.body.password);
-  var edt = null
+  var edt1 = null
   if (edt){
-    edt = edt._id
+    edt1 = edt._id
   }
   else{
-    edt = new EspaceDeTravail({
-      nom:"publique",
+    edt1 = new EspaceDeTravail({
+      nom:"Publique",
       authorisedUsers:[user],
       proprietaire: user,
       description:"Espace publique",
       enjeux: []
     })
-    edt.save()
+    edt1.save()
     
   }
-  console.log("edt : ",edt)
-  user.edts = [edt];
+  console.log("edt1 : ",edt1)
+  user.edts = [edt1._id];
   user.save(function(err) {
     var token;
     token = user.generateJwt();
     res.status(200);
     res.json({
       "token" : token
+      });
     });
-  });
-  
-})
-
-  
-
+  })
 };
 
 module.exports.login = function(req, res, next) {

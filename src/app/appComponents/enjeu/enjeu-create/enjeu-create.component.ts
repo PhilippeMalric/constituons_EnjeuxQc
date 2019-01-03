@@ -37,23 +37,8 @@ export class EnjeuCreateComponent implements OnInit {
 
   constructor(private router: Router, private api: ApiService, private formBuilder: FormBuilder, public dataService: DataService) {
 
-    console.log("construct create enjeu")
+    console.log("constructor create enjeu")
 
-    this.api.postEnjeu({
-      'titre' :"",
-      'description' :"",
-      'categorie' :[],
-      'badges' : this.createBadges2(),
-      'edt':this.dataService.edT
-    })
-      .subscribe(res => {
-        console.log("enjeu res : ",+res);
-          this.id = res['_id'];
-          
-        }, (err) => {
-          console.log(err);
-        });
-      
     this.titreFormGroup = this.formBuilder.group({
       'titre' : [null, Validators.required]
     });
@@ -63,14 +48,36 @@ export class EnjeuCreateComponent implements OnInit {
     this.categorieFormGroup = this.formBuilder.group({
       'categorie' : [null,Validators.required]
     });
-
+ 
    }
 
   ngOnInit = ()=>{
 
    console.log("init create enjeu")
    
+  
+  }
 
+ngAfterViewInit(){
+  console.log("ngAfterViewInit create enjeu")
+  console.log("dataService : ",this.dataService);
+  console.log("dataService.edT : ",this.dataService.edT);
+  setTimeout(()=>{
+    this.api.postEnjeu({
+      'titre' :"",
+      'description' :"",
+      'categorie' :[],
+      'badges' : this.createBadges2(),
+      'edt': this.dataService.edT
+    })
+      .subscribe(res => {
+        console.log("enjeu res : ",res);
+          this.id = res['_id'];
+          
+        }, (err) => {
+          console.log(err);
+        });
+    },3000)
   }
 
   onFormSubmitStep = (form1:FormGroup,form2:FormGroup,form3:FormGroup) => {
