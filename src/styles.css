@@ -120,5 +120,8 @@
     z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
 }
 
-
+hr{
+    margin-top:5px;
+    margin-bottom:5px;
+}
   

@@ -71,7 +71,7 @@ export class PersonneCreateComponent implements OnInit {
       })
       .subscribe(res => {
           let id = res['_id'];
-          
+          this.router.navigate(['/personne-details',id]);
         }, (err) => {
           console.log(err);
         });

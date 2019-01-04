@@ -43,13 +43,15 @@ hr{
   flex: 1; /* child will set to an equal size inside the container*/
 }
  
- 
+ .marginTop50{
+  margin-top:50px
+ }
 
 /*
  * Make the component injected by <router-outlet> full height:
  */
 main {
-  margin-top: 50px;
+  
   min-height: 90vh;
   display: flex;
   flex-direction: column;
@@ -75,4 +77,13 @@ header{
 
 .marginB{
   margin-bottom: 10px;
+}
+
+hr{
+  height: 4px;
+  background-color : #007bff;
+}
+
+.grid{
+  display: grid;
 }

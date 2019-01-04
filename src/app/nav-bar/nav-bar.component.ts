@@ -48,8 +48,6 @@ clickMenu(){
   openBottomSheet(): void {
     this.bottomSheet.open(BottomSheetOverviewExampleSheet);
   }
-
-  
 }
 
 
@@ -146,7 +144,7 @@ export class BottomSheetOverviewExampleSheet implements AfterViewInit{
   onSubmit(): void {
     this.myFile
     console.log("this.myFile : ",this.myFile)
-    this.api.uploadFile(this.edt_name,this.myFile)
+    this.api.uploadFile(this.auth.getUserDetails()._id,this.myFile)
       .subscribe((data) => console.log("data : ",data));
   }
 

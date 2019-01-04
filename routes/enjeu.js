@@ -7,6 +7,30 @@ var Personne = require('../models/Personne.js');
 var mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 
+
+router.get('/clean', function(req, res, next) {
+  Enjeu.find()
+  .exec((err, enjeux) => {
+  console.log("Populated enjeu " + enjeux);
+  console.log("Longueur enjeu " + enjeux.length);
+  for (var enjeu of enjeux){
+      console.log("enjeu : ",enjeu)
+      console.log("authorisedUsers in espace :","authorisedUsers" in enjeu)
+      if(! ("titre" in enjeu) || enjeu.titre == "" ){
+          console.log("Delete enjeu._id",enjeu._id)
+          Enjeu.findByIdAndRemove(enjeu._id, {},function (err, post) {
+              if (err) return console.log(err);
+              console.log("enjeu deleted : ",post)
+          })
+      }
+  }
+  Enjeu.find().populate({path : 'opinions', populate : {path : 'authorModel'}}).lean()
+      .exec((err, enjeux2) => {
+      res.json(enjeux2)
+    })
+  });
+})
+
 /*.populate('opinion').exec((err, opinion) => {
       console.log("Populated User " + opinion);
     })
@@ -41,10 +65,6 @@ router.get('/:id', function(req, res, next) {
       res.json(enjeu);
     });
 });
-
-
-
-
 
 //ADD like
 router.get('/addLike/:id', function(req, res, next) {

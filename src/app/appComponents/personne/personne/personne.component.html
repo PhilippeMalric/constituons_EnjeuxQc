@@ -26,7 +26,7 @@
                   <button  [ngClass]="{marginH10: true}" mat-mini-fab color="accent">
                       <mat-icon [matBadge]="element.dontLike" [matBadgeColor]="element.dontLikeColor" matBadgePosition="above after" aria-label="thumb_down" (click)="addDontLike(element._id)">thumb_down</mat-icon>
                   </button>
-                  <button  mat-mini-fab [routerLink]="['/personnes-details/', element._id]" color="primary">
+                  <button  mat-mini-fab [routerLink]="['/personne-details/', element._id]" color="primary">
                     <mat-icon aria-label="details">details</mat-icon>
                   </button>
                   <button  [ngClass]="{marginH10: true}" mat-mini-fab color="accent">

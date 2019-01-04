@@ -9,6 +9,27 @@ var Personne = require('../models/Personne.js');
     })
 */
 
+router.get('/clean', function(req, res, next) {
+  Opinion.find()
+  .exec((err, opinions) => {
+  console.log("Populated enjeu " + opinions);
+  console.log("Longueur enjeu " + opinions.length);
+  for (var opinion of opinions){
+      console.log("opinion : ",opinion)
+      if(! ("title" in opinion) || opinion.title == "" ){
+          console.log("Delete enjeu._id",opinion._id)
+          Enjeu.findByIdAndRemove(opinion._id, {},function (err, post) {
+              if (err) return console.log(err);
+              console.log("enjeu deleted : ",post)
+          })
+      }
+  }
+  Opinion.find().populate({path : 'authorModel'}).lean()
+      .exec((err, opinion2) => {
+      res.json(opinion2)
+    })
+  });
+})
 
 /* GET ALL Opinion */
 router.get('/', function(req, res, next) {

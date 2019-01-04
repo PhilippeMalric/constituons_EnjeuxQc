@@ -57,7 +57,7 @@
 -->
 <mat-sidenav-container class="all-wrap" >
 
-  <mat-sidenav #snav [mode]="mode" [opened]="opened" role="navigation">
+  <mat-sidenav class="marginTop50" #snav [mode]="mode" [opened]="opened" role="navigation">
       <mat-nav-list>
         <button mat-menu-item *ngIf="!auth.isLoggedIn()"><a routerLink="/home">EnnjeuxQc</a></button>
         <hr>
@@ -84,7 +84,7 @@
   <mat-sidenav-content class="page-wrap overflow-v" style="overflow: visible;">
     <hr>
     
-    <main class="content">
+    <main class="content marginTop50">
         <router-outlet></router-outlet>
     </main>
   

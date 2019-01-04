@@ -373,6 +373,7 @@ getPersonnes(): Observable<any> {
 
 getPersonne(id: string): Observable<any> {
   const url = `${apiUrlPersonne}/${id}`;
+  console.log("url personneId : ",url)
   return this.http.get(url, httpOptions).pipe(
     map(this.extractData),
     catchError(this.handleError));

@@ -9,6 +9,27 @@ var Opinion = require('../models/Opinion.js');
     })
 */
 
+router.get('/clean', function(req, res, next) {
+  Personne.find()
+  .exec((err, personnes) => {
+  console.log("Populated personne " + personnes);
+  console.log("Longueur personne " + personnes.length);
+  for (var personne of personnes){
+      console.log("opinion : ",personne)
+      if(! ("nom" in personne) || personne.nom == "" ){
+          console.log("Delete personne._id",personne._id)
+          Personne.findByIdAndRemove(personne._id, {},function (err, post) {
+              if (err) return console.log(err);
+              console.log("personne deleted : ",post)
+          })
+      }
+  }
+  Personne.find().populate({path : 'authorModel'}).lean()
+      .exec((err, personne2) => {
+      res.json(personne2)
+    })
+  });
+})
 
 /* GET ALL Personne */
 router.get('/', function(req, res, next) {
@@ -26,12 +47,11 @@ router.get('/findByName/:name', function(req, res) {
       console.log("Populated opinion " + enjeu);
       res.json(enjeu)
     });
-  
 });
 
 /* GET SINGLE Personne BY ID */
 router.get('/:id', function(req, res, next) {
-  Personne.findById(req.params.id, function (err, personne) {
+  Personne.findById(req.params.id).populate({path : 'opinions'}).lean().exec( function (err, personne) {
     if (err) return next(err);
     res.json(personne);
   });
