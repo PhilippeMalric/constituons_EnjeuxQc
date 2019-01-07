@@ -9,7 +9,7 @@ module.exports.profileRead = function(req, res) {
     });
   } else {
     User
-      .findById(req.payload._id)
+      .findById(req.payload._id).populate({path : 'edts', populate : {path : 'enjeux', populate : {path : 'opinions', populate : {path : 'authorModel'}}}})
       .exec(function(err, user) {
         res.status(200).json(user);
       });
@@ -28,9 +28,9 @@ module.exports.getUsers = function(req, res) {
 };
 
 module.exports.getUser = function(req, res) {
-
+  
   User
-    .findById(req.params.id).populate("edts")
+    .findById(req.params.id)
     .exec(function(err, user) {
       console.log("user : ",user)
       res.status(200).json(user);

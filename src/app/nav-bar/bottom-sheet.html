@@ -2,6 +2,11 @@
   <div *ngIf="auth.isLoggedIn()">
     <h4>Vous êtes authentifié sous le nom de : {{auth.getUserDetails()?.name}}</h4>
     <hr>
+    
+    <button mat-raised-button class="center" type="button" color="primary" (click)="click()">
+        getSpaces
+    </button>
+    
     <h3>Choisissez un espace de travail :</h3>
     <mat-radio-group  class="example-radio-group" (change)="radioChange($event)" #radioGroup>
         <mat-radio-button class="example-radio-button" *ngFor="let espace of espacesName" [value]="espace" [checked]="espace.checked">

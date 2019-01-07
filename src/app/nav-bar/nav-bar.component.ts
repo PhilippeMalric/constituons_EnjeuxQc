@@ -24,7 +24,7 @@ export class NavBarComponent implements OnDestroy {
   
   private _mobileQueryListener: () => void;
 
-  constructor(public auth: AuthenticationService,private bottomSheet: MatBottomSheet) {}
+  constructor(public auth: AuthenticationService, private bottomSheet: MatBottomSheet, public dataService: DataService) {}
 
 ngOnInit(){
   this.opened = true;
@@ -34,6 +34,9 @@ ngOnInit(){
   if (window.screen.width < 600) { // 768px portrait
     this.mode = 'push';
     this.opened = false;
+  }
+  if(this.auth.isLoggedIn){
+    this.dataService.getUser()
   }
 }
 
@@ -57,7 +60,7 @@ clickMenu(){
   templateUrl: 'bottom-sheet.html',
 })
 
-export class BottomSheetOverviewExampleSheet implements AfterViewInit{
+export class BottomSheetOverviewExampleSheet {
 
   @ViewChild('radioGroup') radioGroup: MatRadioGroup;
 
@@ -68,7 +71,6 @@ export class BottomSheetOverviewExampleSheet implements AfterViewInit{
   Name:string; 
   myFile:File; /* property of File type */
   espaceChosen:string;
-  edt_name=""
 
   constructor(
     public auth: AuthenticationService, 
@@ -77,55 +79,43 @@ export class BottomSheetOverviewExampleSheet implements AfterViewInit{
     public dataService: DataService, 
     private bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet>
     ) {
-      this.getUserEdts()
       console.log("User details : ",this.auth.getUserDetails())
-    
+      setTimeout(()=>{
+        this.espaces = this.dataService.userData.edts
+      },5000)
+      
     }
 
-  
-  getUserEdts(){
-    this.api.getUser(this.auth.getUserDetails()._id)
-      .subscribe(res => {
-        console.log("espaceDeTravail res after created : ",+res);
-        this.espaces = res.edts
-        this.espacesName = res.edts.map(x=>{return {nom:x.nom,checked:(this.dataService.edT_nom == x.nom)}});
-        
-        let id = this.dataService.edT
-        console.log("id : ",id)
-        if(id){
-          this.api.getEspaceDeTravail(id)
-          .subscribe(res => {
-            console.log("getEspaceDeTravail : ",res);
-            var theJSON = JSON.stringify(res);
-            const blob = new Blob([theJSON], { type: 'application/octet-stream' });
-            this.downloadJsonHref = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
-            }, (err) => {
-              console.log(err);
-            });
-        }
-        }, (err) => {
-          console.log(err);
-        });
-        this.bottomSheetRef.afterOpened().subscribe(x=>{
-          //this.espacesName = this.espaces.map(x=>{return {nom:x.nom,checked:(this.dataService.edT_nom == x.nom)}});
-        })
+  ngOnInit(){
+    this.getSpaces()
   }
 
-  ngAfterViewInit(){
-    
-  }
-
-  onLogin(event){
-    console.log("User details : ",this.auth.getUserDetails())
-    this.getUserEdts()
-  }
-
-  radioChange(event: MatRadioChange) {
-    let nom = event.value.nom
-    this.dataService.edT = this.nameToId(nom)
-    this.dataService.edT_nom = nom
-    this.getUserEdts()
+click(){
+  this.dataService.getUser()
 }
+
+  getSpaces()
+  {
+    console.log("getspaces")
+    console.log("this.dataService.userData.edts",this.dataService.userData.edts)
+    console.log("this.dataService.edT_nom",this.dataService.edT_nom)
+    this.espaces = this.dataService.userData.edts
+    this.espacesName = []
+
+    for(let espace of this.espaces){
+      if(this.dataService.edT == ""){
+        this.dataService.edT = espace._id
+      }
+      if(espace.nom == this.dataService.edT_nom){
+        this.espacesName.push({nom:espace.nom,checked:true})
+      }
+      else{
+        this.espacesName.push({nom:espace.nom,checked:false})
+      }
+
+    }
+  }
+
   nameToId(name){
     for(let e of this.espaces){
       if(name == e.nom){
@@ -133,6 +123,23 @@ export class BottomSheetOverviewExampleSheet implements AfterViewInit{
       }
     }
     return false;
+  }
+
+  radioChange(event: MatRadioChange) {
+    let nom = event.value.nom
+    this.dataService.edT_nom = nom
+    this.dataService.edT = this.nameToId(nom)
+    let result=null
+    for(let espace of this.dataService.userData.edts){
+      if(espace.nom == nom){
+        result = espace
+      }
+    }
+    this.dataService.espace = result;
+    console.log("getEspaceDeTravail : ",result);
+    var theJSON = JSON.stringify(result);
+    const blob = new Blob([theJSON], { type: 'application/octet-stream' });
+    this.downloadJsonHref = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
   }
 
   fileChange($event: any){
@@ -145,7 +152,16 @@ export class BottomSheetOverviewExampleSheet implements AfterViewInit{
     this.myFile
     console.log("this.myFile : ",this.myFile)
     this.api.uploadFile(this.auth.getUserDetails()._id,this.myFile)
-      .subscribe((data) => console.log("data : ",data));
+      .subscribe((data) => {
+        this.auth.profile().subscribe(user => {
+          this.dataService.userData = user 
+          this.getSpaces()    
+        }, (err) => {
+          console.error(err);
+        });
+        
+        console.log("data : ",data)
+      });
   }
 
 }

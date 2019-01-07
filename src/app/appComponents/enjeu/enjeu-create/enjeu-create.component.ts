@@ -4,6 +4,7 @@ import { ApiService } from '../../../api.service';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material';
 import { DataService } from 'src/app/sharedServices';
+import { AuthenticationService } from 'src/app/service/authentication.service';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class EnjeuCreateComponent implements OnInit {
 
   opTogle:Boolean = false
 
-  constructor(private router: Router, private api: ApiService, private formBuilder: FormBuilder, public dataService: DataService) {
+  constructor(private auth: AuthenticationService,private router: Router, private api: ApiService, private formBuilder: FormBuilder, public dataService: DataService) {
 
     console.log("constructor create enjeu")
 
@@ -55,36 +56,24 @@ export class EnjeuCreateComponent implements OnInit {
 
    console.log("init create enjeu")
    
-  
+   if(this.auth.isLoggedIn){
+      this.dataService.getUser();
+    }
   }
 
 ngAfterViewInit(){
   console.log("ngAfterViewInit create enjeu")
   console.log("dataService : ",this.dataService);
   console.log("dataService.edT : ",this.dataService.edT);
-  setTimeout(()=>{
-    this.api.postEnjeu({
-      'titre' :"",
-      'description' :"",
-      'categorie' :[],
-      'badges' : this.createBadges2(),
-      'edt': this.dataService.edT
-    })
-      .subscribe(res => {
-        console.log("enjeu res : ",res);
-          this.id = res['_id'];
-          
-        }, (err) => {
-          console.log(err);
-        });
-    },3000)
-  }
+}
 
   onFormSubmitStep = (form1:FormGroup,form2:FormGroup,form3:FormGroup) => {
-    this.api.updateEnjeu(this.id,{
+    this.api.postEnjeu({
       'titre' :form1.value.titre,
       'description' :form2.value.description,
       'categories' :this.cats,
+      'badges' : this.createBadges2(),
+      'edt': this.dataService.edT,
       'opsId' : this.opsID
     })
       .subscribe(res => {
@@ -93,7 +82,7 @@ ngAfterViewInit(){
           console.log(err);
         });
   }
-
+  
   createBadges2(){
     let l = Math.floor(Math.random() * 10)
     let s = []

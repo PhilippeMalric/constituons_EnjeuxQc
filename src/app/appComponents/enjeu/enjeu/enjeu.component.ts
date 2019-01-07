@@ -90,45 +90,42 @@ export class EnjeuComponent implements OnInit {
       }
 
     }
-    this.api.getEnjeux()
-      .subscribe(res => {
-        if(res.length > 10){
-          res = res.slice(0, 10)
-        }
-        console.log(res);
-        let catD = {}
-        for(let e of res){
-          e.likeColor = "accent"
-          e.dontLikeColor = "accent"
-          e.checked = false
-          for (let s of e.categories){
-            catD[s.replace("_"," ").replace("é","e").replace("'","_")]=1
-          }          
-        }
-        this.catList = Object.keys(catD)
-        
-        this.enjeuxG = res;
-        this.enjeux = res;
-        for (let enj of res){
-          console.log("enj : ",enj)
-          for (let ca of enj.categories){
-            ca = ca.replace("_"," ").replace("é","e").replace("'","_")
-            for (let catChosen of this.catList){
-              if(ca == catChosen){
-                console.log("--enj : ",enj)
-                if(ca  in this.enjeuxTabs){
-                  this.enjeuxTabs[ca].push(enj);
-                }
-                else{
-                  this.enjeuxTabs[ca] = [enj];
-                }
-              }
+    let res = this.dataService.espace.enjeux
+
+    if(res.length > 10){
+      res = res.slice(0, 10)
+    }
+    console.log(res);
+    let catD = {}
+    for(let e of res){
+      e.likeColor = "accent"
+      e.dontLikeColor = "accent"
+      e.checked = false
+      for (let s of e.categories){
+        catD[s.replace("_"," ").replace("é","e").replace("'","_")]=1
+      }          
+    }
+    this.catList = Object.keys(catD)
+    
+    this.enjeuxG = res;
+    this.enjeux = res;
+    for (let enj of res){
+      console.log("enj : ",enj)
+      for (let ca of enj.categories){
+        ca = ca.replace("_"," ").replace("é","e").replace("'","_")
+        for (let catChosen of this.catList){
+          if(ca == catChosen){
+            console.log("--enj : ",enj)
+            if(ca  in this.enjeuxTabs){
+              this.enjeuxTabs[ca].push(enj);
+            }
+            else{
+              this.enjeuxTabs[ca] = [enj];
             }
           }
         }
-      }, err => {
-        console.log(err);
-      });
+      }
+    }
   }
 
 

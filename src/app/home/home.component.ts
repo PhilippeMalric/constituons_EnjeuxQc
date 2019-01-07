@@ -24,26 +24,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     if(this.auth.isLoggedIn()){
-      this.getUserEdts()
     }
   }
 
-getUserEdts(){
-  this.api.getUser(this.auth.getUserDetails()._id)
-    .subscribe(res => {
-      console.log("espaceDeTravail res after created : ",+res);
-      this.espaces = res.edts
-      this.espacesName = res.edts.map(x=>x.nom);
-        
-      }, (err) => {
-        console.log(err);
-      });
-}
-
 
   onLogin(event){
-    console.log("User details : ",this.auth.getUserDetails())
-    this.getUserEdts()
   }
 
 }
