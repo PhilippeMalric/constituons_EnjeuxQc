@@ -27,14 +27,8 @@ export class LoginComponent {
   espaceChosen:string;
   edt_name=""
 
-  constructor(private sanitizer: DomSanitizer, private auth: AuthenticationService, private router: Router, public dataService: DataService) {
-    
-  }
- 
-
-  
-
-  login() {
+  constructor(private sanitizer: DomSanitizer, private auth: AuthenticationService, private router: Router, public dataService: DataService) { }
+   login() {
     console.log("login")
     this.auth.login(this.credentials).subscribe(() => {
       this.dataService.getUser()

@@ -17,6 +17,9 @@ export class PersonneEditComponent implements OnInit {
   slogan:string = '';
   photo:string = '';
   matcher:any;
+
+  new=true;
+
   constructor(private router: Router, private route: ActivatedRoute, private api: ApiService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {

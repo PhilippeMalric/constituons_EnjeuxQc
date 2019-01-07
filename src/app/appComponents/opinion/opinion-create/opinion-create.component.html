@@ -26,14 +26,14 @@
   <mat-step [stepControl]="authorFormGroup">
     <form [formGroup]="authorFormGroup" class="auto-complete-form">
       <ng-template matStepLabel>Qui est l'auteur de l'opinion? / Who think this way?</ng-template>
-        <mat-form-field class="formFieldWidth90pc left width_300">
-          <input type="text" placeholder="Choisissez un nom / Pick one name" formControlName="author" aria-label="Number" matInput [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let option of options" [value]="option">
-              {{option}}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
+      <mat-form-field class="formFieldWidth90pc left width_300">
+        <input type="text" placeholder="Choisissez un nom / Pick one name" formControlName="author" aria-label="Number" matInput [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of options" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
       <div class="left">
         <button mat-button color="accent" matStepperPrevious>Back - Retour</button>
         <button mat-button color="primary" matStepperNext>Next + Prochain</button>

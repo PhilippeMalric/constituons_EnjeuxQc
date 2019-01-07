@@ -4,6 +4,7 @@ import { AuthenticationService, UserDetails } from '../service/authentication.se
 import { ApiService } from '../api.service';
 import { MatRadioChange } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Personne } from '../class/Personne';
 
 @Component({
   selector: 'app-home',
@@ -19,11 +20,25 @@ export class HomeComponent implements OnInit {
   downloadJsonHref:any;
   Name:string; 
   myFile:File; /* property of File type */
+
+  options:any
+
   constructor(private sanitizer: DomSanitizer, private api: ApiService, private auth: AuthenticationService, public dataService: DataService) { }
 
 
   ngOnInit() {
     if(this.auth.isLoggedIn()){
+      this.api.getPersonnes().subscribe((data:Personne[]) => {
+        this.options = data.map((e:Personne)=>{return ""+e.nom})
+      })
+    }
+  }
+  ngOnchange(){
+    console.log("ChangeDetected")
+    if(this.auth.isLoggedIn()){
+      this.api.getPersonnes().subscribe((data:Personne[]) => {
+        this.options = data.map((e:Personne)=>{return ""+e.nom})
+      })
     }
   }
 

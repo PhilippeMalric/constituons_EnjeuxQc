@@ -2,40 +2,47 @@
 <mat-vertical-stepper [linear]="true" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Écrivez votre nom / Fill out your name</ng-template>
+      <h3 color="accent">Lorsque vous écrivez une opinion sous le nom de quelqu'un d'autre, il faut citer ses sources (URL).</h3>
+      <ng-template matStepLabel >Écrivez un nom / Fill out a name</ng-template>
       <mat-form-field>
         <input matInput placeholder="Prénom / First name" formControlName="prenom" required>
       </mat-form-field>
+      <br>
       <mat-form-field>
         <input matInput placeholder="Nom / Last name" formControlName="nom" required>
       </mat-form-field>
       <div>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperNext color="primary">Next</button>
       </div>
     </form>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Indiquez un slogan et votre description</ng-template>
+      <ng-template matStepLabel >Indiquez un slogan et une description</ng-template>
+      <ng-template color="accent">(Il est possible de changer ces valeurs)</ng-template>
       <mat-form-field>
         <input matInput placeholder="Slogan" formControlName="slogan" required>
       </mat-form-field>
+      <br>
       <mat-form-field>
-          <input matInput placeholder="Description" formControlName="description" required>
+          <input matInput placeholder="Description" formControlName="description"  required>
         </mat-form-field>
       <div>
-        <button mat-button matStepperPrevious>Back - Retour</button>
-        <button mat-button matStepperNext>Next + Prochain</button>
+        <button mat-button matStepperPrevious color="accent">Back - Retour </button>
+        <button mat-button matStepperNext color="primary">Next + Prochain</button>
       </div>
     </form>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done / Fin</ng-template>
     Voilà / You are now done.
-    <div>
-      <button mat-button matStepperPrevious>Back - Retrour</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-      <button mat-button (click)="onFormSubmit2(firstFormGroup,secondFormGroup)">Submit & Validez</button>
+    <div *ngIf="new">
+      <button mat-button matStepperPrevious color="accent">Back - Retrour</button>
+      <button mat-button (click)="stepper.reset()" color="warn">Reset</button>
+      <button mat-button (click)="onFormSubmit2(firstFormGroup,secondFormGroup)" color="primary">Submit & Validez</button>
+    </div>
+    <div *ngIf="!new">
+      <button mat-raised-button (click)="stepper.reset();new=true" color="accent" >Nouveau</button>
     </div>
   </mat-step>
 </mat-vertical-stepper>

@@ -16,7 +16,7 @@ export class PersonneCreateComponent implements OnInit {
   slogan:string='';
   photo:string='';
   details: UserDetails;
-  
+  new=true;
   constructor(private auth: AuthenticationService, private router: Router, private api: ApiService, private formBuilder: FormBuilder) { }
 
   firstFormGroup: FormGroup;
@@ -31,13 +31,6 @@ export class PersonneCreateComponent implements OnInit {
 
 
   ngOnInit() {
-
-    this.auth.profile().subscribe(user => {
-      this.details = user;
-    }, (err) => {
-      console.error(err);
-    });
-  
     this.firstFormGroup = this.formBuilder.group({
       nom: ['', Validators.required],
       prenom: ['', Validators.required]
@@ -48,20 +41,13 @@ export class PersonneCreateComponent implements OnInit {
     });
   }
 
-  onFormSubmit(form:FormGroup) {
-    this.api.postPersonne(form)
-      .subscribe(res => {
-          let id = res['_id'];
-          this.router.navigate(['/personne-details', id]);
-        }, (err) => {
-          console.log(err);
-        });
-  }
   onFormSubmit2(form1:FormGroup,form2:FormGroup) {
 
     console.log(form1,form2)
-
-    this.api.postPersonne({
+    this.new = false;
+    this.auth.profile().subscribe(user => {
+      this.details = user;
+      this.api.postPersonne({
         nom:form1.value.nom,
         prenom:form1.value.prenom,
         slogan:form2.value.slogan,
@@ -70,11 +56,17 @@ export class PersonneCreateComponent implements OnInit {
         userId: this.details._id
       })
       .subscribe(res => {
-          let id = res['_id'];
-          this.router.navigate(['/personne-details',id]);
+
+          console.log("postPersonne : ",res)
         }, (err) => {
           console.log(err);
         });
+    }, (err) => {
+      console.error(err);
+    });
+
+    
+    
   }
 
   multiplePost() {

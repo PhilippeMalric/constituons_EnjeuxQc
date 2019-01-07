@@ -81,7 +81,7 @@ export class BottomSheetOverviewExampleSheet {
     ) {
       console.log("User details : ",this.auth.getUserDetails())
       setTimeout(()=>{
-        this.espaces = this.dataService.userData.edts
+        this.espaces = this.auth.getUserDetails().edts
       },5000)
       
     }

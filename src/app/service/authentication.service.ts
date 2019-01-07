@@ -64,7 +64,6 @@ export class AuthenticationService {
 
   private request(method: 'post'|'get', type: 'login'|'register'|'profile', user?: TokenPayload): Observable<any> {
     let base;
-
     if (method === 'post') {
       base = this.http.post(`/api/${type}`, user);
     } else {
@@ -73,7 +72,7 @@ export class AuthenticationService {
 
     const request = base.pipe(
       map((data: TokenResponse) => {
-        if (data.token) {
+        if (data && data.token) {
           this.saveToken(data.token);
         }
         return data;

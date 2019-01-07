@@ -20,6 +20,19 @@
     </div>
     <div class="left" *ngIf="auth.isLoggedIn()">
         <h2>Bienvenue {{auth.getUserDetails()?.name}} sur la plateforme Enjeux Québec.</h2>
+        <div *ngIf="options?.length > 0">
+          <mat-form-field class="formFieldWidth90pc left width_300">
+            <input type="text" placeholder="Choisissez un nom / Pick one name"   matInput [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of options" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <div *ngIf="!(options?.length > 0)">
+          <app-personne-create></app-personne-create>
+        </div>
     </div>
     <br>
     <h2>Introduction</h2>
